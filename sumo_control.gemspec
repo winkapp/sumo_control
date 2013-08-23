@@ -1,10 +1,10 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require './version'
+require 'lib/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "sumo_control"
+  spec.name          = "sumo_control.gemspec"
   spec.version       = SumoControl::VERSION
   spec.authors       = ["Tobias Macey", "Christopher Patti"]
   spec.email         = ["tmacey@gazelle.com", "cpatti@gazelle.com"]
