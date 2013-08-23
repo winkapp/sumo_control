@@ -4,7 +4,7 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'lib/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "sumo_control.gemspec"
+  spec.name          = "sumo_control"
   spec.version       = SumoControl::VERSION
   spec.authors       = ["Tobias Macey", "Christopher Patti"]
   spec.email         = ["tmacey@gazelle.com", "cpatti@gazelle.com"]
