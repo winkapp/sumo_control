@@ -63,17 +63,16 @@ module SumoControl
       }
     )
 
-    # print "json_msg="
-    # puts add_json
-    # puts
-    # puts "ip=#{$server_private_ip}"
-    # puts "Sumo user=#{$sumo_user} Sumo Password=#{$sumo_pass} server name=#{$server_name}"
-    # puts "API endpoint=#{$sumo_api_host}#{$sumo_api_path}"
+    print "json_msg="
+    puts source_definition
+    puts
+    puts "ip=#{host_ip}"
+    puts "server name=#{host_name}"
 
     response = sumo_connection.post do |req|
       req.url "/api/v1/collectors/#{collector_id}/sources"
       req.headers['Content-Type'] = 'application/json'
-      req.body = add_json
+      req.body = source_definition
     end
 
     json_response=response.body
