@@ -127,11 +127,12 @@ module SumoControl
   def deactivate_sumo_source(id_file_path=nil, collector_id=nil, sumo_connection=nil)
     f = File.new(id_file_path, 'r')
     ids = f.readlines
-    responses = ids.map do |id|
+    responses = []
+    ids.each do |id|
       source = sumo_connection.get "/api/v1/collectors/#{collector_id}/sources/#{id}"
       parsed = JSON.parse(source)
       parsed['source']['alive'] = false
-      sumo_conection.put do |req|
+      responses << sumo_conection.put do |req|
         req.url source_path
         req.body = parsed.to_json
         req.headers['Content-Type'] = 'application/json'
