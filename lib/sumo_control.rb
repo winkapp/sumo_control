@@ -14,7 +14,7 @@ module SumoControl
     return conn
   end
 
-  def apache_filters()
+  def apache_filters
     %(
       [
         {
@@ -42,7 +42,7 @@ module SumoControl
           "category": "#{category}",
           "defaultDateFormat": "",
           "description": "",
-          "filters": #{"#{category}_filters"},
+          "filters": #{send("#{category}_filters")},
           "forceTimeZone": false,
           "hostName": "",
           "keyPassword": "",
