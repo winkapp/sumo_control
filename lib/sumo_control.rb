@@ -132,7 +132,7 @@ module SumoControl
       source = sumo_connection.get "/api/v1/collectors/#{collector_id}/sources/#{id}"
       parsed = JSON.parse(source.body)
       parsed['source']['alive'] = false
-      responses << sumo_conection.put do |req|
+      responses << sumo_connection.put do |req|
         req.url source_path
         req.body = parsed.to_json
         req.headers['Content-Type'] = 'application/json'
