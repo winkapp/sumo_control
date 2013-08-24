@@ -133,7 +133,7 @@ module SumoControl
       parsed = JSON.parse(source.body)
       parsed['source']['alive'] = false
       responses << sumo_connection.put do |req|
-        req.url source_path
+        req.url "/api/v1/collectors/#{collector_id}/sources/#{id}"
         req.body = parsed.to_json
         req.headers['Content-Type'] = 'application/json'
         req.headers['If-Match'] = source.headers['etag']
