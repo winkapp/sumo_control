@@ -73,22 +73,6 @@ module SumoControl
       req.body = source_definition
     end
 
-    json_response=response.body
-    puts "Sumo Logic JSON response: #{json_response}"
-
-    source_json=JSON.parse(json_response)
-    source_id=source_json['source']['id']
-
-    puts "Sumologic Source Id: #{source_id}"
-    if !source_id
-      puts "Invalid Sumologic Source ID returned. Exiting!"
-      exit(1)
-    else
-      puts "Writing source id #{source_id} to #{id_file_path}"
-      f = File.new(id_file_path,"a")
-      f.puts(source_id)
-      f.close
-    end
     return response
   end
 
@@ -114,7 +98,28 @@ module SumoControl
     if add_or_update_response.status == 400 && add_or_update_response.code == 'collectors.validation.name.duplicate'
       add_or_update_response = update_server_source(source_name, host_ip, collector_id, sumo_connection)
     end
+    store_source_id(add_or_update_response) if add_or_update_response.status < 400
     return add_or_update_response
+  end
+
+  def store_source_id(response_object)
+    json_response=response_object.body
+    puts "Sumo Logic JSON response: #{json_response}"
+
+    source_json=JSON.parse(json_response)
+    source_id=source_json['source']['id']
+
+    puts "Sumologic Source Id: #{source_id}"
+    if !source_id
+      puts "Invalid Sumologic Source ID returned. Exiting!"
+      exit(1)
+    else
+      puts "Writing source id #{source_id} to #{id_file_path}"
+      f = File.new(id_file_path,"a")
+      f.puts(source_id)
+      f.close
+    end
+
   end
 
   def deactivate_sumo_source(id_file_path=nil, collector_id=nil, sumo_connection=nil)
