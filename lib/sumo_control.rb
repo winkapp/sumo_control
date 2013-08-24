@@ -15,20 +15,18 @@ module SumoControl
   end
 
   def apache_filters
-    %(
-      [
-        {
-          :regexp => ".*\\\\\\"GET /up HTTP/1\\\\.0\\\\\\".*",
-          :name=>"exclude health check",
-          :filterType=>"Exclude"
-        },
-        {
-          :filterType => "Exclude",
-          :name => "exclude server-status",
-          :regexp => ".*\\\\\\"GET /server-status\\\\?auto HTTP/1\\\\.1\\\\\\".*"
-        }
-      ]
-    )
+    %([
+      {
+        "filterType": "Exclude",
+        "name": "exclude health check",
+        "regexp": ".*\\\\\\"GET /up HTTP/1\\\\.0\\\\\\".*"
+      },
+      {
+        "filterType": "Exclude",
+        "name": "exclude server-status",
+        "regexp": ".*\\\\\\"GET /server-status\\\\?auto HTTP/1\\\\.1\\\\\\".*"
+      }
+    ])
   end
 
   def add_server_source(category='apache', source_name=nil, host_ip=nil, log_path=nil, id_file_path=nil, collector_id=nil, sumo_connection=nil)
