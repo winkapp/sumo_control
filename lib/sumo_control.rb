@@ -83,12 +83,14 @@ module SumoControl
     matched = sources['sources'].map do |source|
       source['name'] == source_name ? source : nil
     end.compact.first
+    source_response = sumo_connection.get "#{sumo_api_path}/#{matched['id']}"
     matched['remoteHost'] = host_ip
     matched['alive'] = true
     update_response = sumo_connection.put do |req|
       req.url "#{sumo_api_path}/#{matched['id']}"
       req.body = {:source => matched}.to_json
       req.headers['Content-Type'] = 'application/json'
+      req.headers['If-Match'] = source_response.headers['etag']
     end
     return update_response
   end
@@ -133,6 +135,7 @@ module SumoControl
         req.url source_path
         req.body = parsed.to_json
         req.headers['Content-Type'] = 'application/json'
+        req.headers['If-Match'] = source.headers['etag']
       end
     end
     return responses
