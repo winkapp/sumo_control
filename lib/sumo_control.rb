@@ -86,7 +86,7 @@ module SumoControl
     matched['remoteHost'] = host_ip
     matched['alive'] = true
     update_response = sumo_connection.put do |req|
-      req.url = "#{sumo_api_path}/#{matched['id']}"
+      req.url "#{sumo_api_path}/#{matched['id']}"
       req.body = {:source => matched}.to_json
       req.headers['Content-Type'] = 'application/json'
     end
@@ -130,7 +130,7 @@ module SumoControl
       parsed = JSON.parse(source)
       parsed['source']['alive'] = false
       sumo_conection.put do |req|
-        req.url = source_path
+        req.url source_path
         req.body = parsed.to_json
         req.headers['Content-Type'] = 'application/json'
       end
