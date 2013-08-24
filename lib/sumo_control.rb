@@ -67,7 +67,7 @@ module SumoControl
     puts source_definition
     puts
     puts "ip=#{host_ip}"
-    puts "server name=#{host_name}"
+    puts "server name=#{source_name}"
 
     response = sumo_connection.post do |req|
       req.url "/api/v1/collectors/#{collector_id}/sources"
