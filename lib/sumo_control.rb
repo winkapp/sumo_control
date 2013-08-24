@@ -79,7 +79,7 @@ module SumoControl
   def update_server_source(source_name=nil, host_ip=nil, collector_id=nil, sumo_connection=nil)
     sumo_api_path = "/api/v1/collectors/#{collector_id}/sources"
     search_response = sumo_connection.get sumo_api_path
-    sources = JSON.parse(response.body)
+    sources = JSON.parse(search_response.body)
     matched = sources['sources'].map do |source|
       source['name'] == source_name ? source : nil
     end.compact.first
