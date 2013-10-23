@@ -15,19 +15,30 @@ module SumoControl
   end
 
   def apache_filters
-    %([
+    [
       {
-        "filterType": "Exclude",
-        "name": "exclude health check",
-        "regexp": ".*\\\\\\"GET /up HTTP/1\\\\.0\\\\\\".*"
+        :filterType => "Exclude",
+        :name => "exclude health check",
+        :regexp => /.*\"GET \/up HTTP\/1\.0\".*/.inspect[1...-1]
       },
       {
-        "filterType": "Exclude",
-        "name": "exclude server-status",
-        "regexp": ".*\\\\\\"GET /server-status\\\\?auto HTTP/1\\\\.1\\\\\\".*"
+        :filterType => "Exclude",
+        :name => "exclude server-status",
+        :regexp => /.*\"GET \/server-status\?auto HTTP\/1\.1\".*/.inspect[1...-1]
       }
-    ])
+    ].to_json
   end
+
+  def sumo_add_or_update(category='apache', source_name=nil, host_ip=nil, log_path=nil, id_file_path=nil, collector_id=nil, sumo_connection=nil)
+    add_or_update_response = add_server_source(category, source_name, host_ip, log_path, collector_id, sumo_connection)
+    if add_or_update_response.status == 400 && JSON.parse(add_or_update_response.body)['code'] == 'collectors.validation.name.duplicate'
+      add_or_update_response = update_server_source(source_name, host_ip, collector_id, sumo_connection)
+    end
+    store_source_id(add_or_update_response, id_file_path) if add_or_update_response.status < 400
+    return add_or_update_response
+  end
+
+protected
 
   def add_server_source(category='apache', source_name=nil, host_ip=nil, log_path=nil, collector_id=nil, sumo_connection=nil)
     source_definition = %(
@@ -85,7 +96,6 @@ module SumoControl
     end.compact.first
     source_response = sumo_connection.get "#{sumo_api_path}/#{matched['id']}"
     matched['remoteHost'] = host_ip
-    matched['alive'] = true
     update_response = sumo_connection.put do |req|
       req.url "#{sumo_api_path}/#{matched['id']}"
       req.body = {:source => matched}.to_json
@@ -95,14 +105,6 @@ module SumoControl
     return update_response
   end
 
-  def sumo_add_or_update(category='apache', source_name=nil, host_ip=nil, log_path=nil, id_file_path=nil, collector_id=nil, sumo_connection=nil)
-    add_or_update_response = add_server_source(category, source_name, host_ip, log_path, collector_id, sumo_connection)
-    if add_or_update_response.status == 400 && JSON.parse(add_or_update_response.body)['code'] == 'collectors.validation.name.duplicate'
-      add_or_update_response = update_server_source(source_name, host_ip, collector_id, sumo_connection)
-    end
-    store_source_id(add_or_update_response, id_file_path) if add_or_update_response.status < 400
-    return add_or_update_response
-  end
 
   def store_source_id(response_object, id_file_path=nil)
     json_response=response_object.body
@@ -123,23 +125,4 @@ module SumoControl
     end
 
   end
-
-  def deactivate_sumo_source(id_file_path=nil, collector_id=nil, sumo_connection=nil)
-    f = File.new(id_file_path, 'r')
-    ids = f.readlines
-    responses = []
-    ids.each do |id|
-      source = sumo_connection.get "/api/v1/collectors/#{collector_id}/sources/#{id}"
-      parsed = JSON.parse(source.body)
-      parsed['source']['alive'] = false
-      responses << sumo_connection.put do |req|
-        req.url "/api/v1/collectors/#{collector_id}/sources/#{id}"
-        req.body = parsed.to_json
-        req.headers['Content-Type'] = 'application/json'
-        req.headers['If-Match'] = source.headers['etag']
-      end
-    end
-    return responses
-  end
-
 end
