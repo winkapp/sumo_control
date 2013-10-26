@@ -1,0 +1,155 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://api.sumologic.com/api/v1/collectors/4216085/sources
+    body:
+      string: "\n      {\n        \"source\":\n        {\n          \"alive\": true,\n          \"authMethod\": \"key\",\n          \"automaticDateParsing\": true,\n          \"category\": \"apache\",\n          \"defaultDateFormat\": \"\",\n          \"description\": \"\",\n          \"filters\": [\n      {\n        \"filterType\": \"Exclude\",\n        \"name\": \"exclude health check\",\n        \"regexp\": \".*\\\\\\\"GET /up HTTP/1\\\\.0\\\\\\\".*\"\n      },\n      {\n        \"filterType\": \"Exclude\",\n        \"name\": \"exclude server-status\",\n        \"regexp\": \".*\\\\\\\"GET /server-status\\\\?auto HTTP/1\\\\.1\\\\\\\".*\"\n      }\n    ],\n          \"forceTimeZone\": false,\n          \"hostName\": \"\",\n          \"keyPassword\": \"\",\n          \"keyPath\": \"/home/sumo/.ssh/id_rsa\",\n          \"manualPrefixRegexp\": \"\",\n          \"multilineProcessingEnabled\": false,\n          \"name\": \"test_existing_apache\",\n          \"remoteHost\": \"192.168.11.23\",\n          \"remotePassword\": \"\",\n          \"remotePath\": \"/var/log/apache2/access_log\",\n          \"remotePort\": 22,\n          \"remoteUser\": \"root\",\n          \"sourceType\": \"RemoteFile\",\n          \"status\": \"\",\n          \"timeZone\": \"\",\n          \"useAutolineMatching\": false\n        }\n      }\n    "
+    headers:
+      Content-Type:
+      - application/json
+      User-Agent:
+      - Faraday v0.8.8
+      Authorization:
+      - Basic dGVzdEBleGFtcGxlLmNvbTpwYXNzd29yZA==
+  response:
+    status:
+      code: 400
+      message:
+    headers:
+      content-length:
+      - "164"
+      date:
+      - Sat, 26 Oct 2013 22:33:41 GMT
+      connection:
+      - Close
+      set-cookie:
+      - AWSELB=D5C1176F0665104977B708B0B48E6FFEC09E311CD1473A91FD800B5F0A2443FAC23088ACED0D807762BB3B769CEAADA14ED5C9BC9C86BA1749DC556A5C1B04944D462E0D92;PATH=/
+      content-type:
+      - application/json; charset=ISO-8859-1
+      cache-control:
+      - no-cache="set-cookie"
+    body:
+      string: |-
+        {
+          "status" : 400,
+          "id" : "7ZHQL-J14A7-7MZ0D",
+          "code" : "collectors.validation.name.duplicate",
+          "message" : "A resource with the same name already exists."
+        }
+    http_version:
+  recorded_at: Sat, 26 Oct 2013 22:33:43 GMT
+- request:
+    method: get
+    uri: https://api.sumologic.com/api/v1/collectors/4216085/sources
+    body:
+      string: ""
+    headers:
+      User-Agent:
+      - Faraday v0.8.8
+      Authorization:
+      - Basic dGVzdEBleGFtcGxlLmNvbTpwYXNzd29yZA==
+  response:
+    status:
+      code: 200
+      message:
+    headers:
+      content-length:
+      - "5963"
+      date:
+      - Sat, 26 Oct 2013 22:33:43 GMT
+      strict-transport-security:
+      - max-age=604800
+      connection:
+      - Close
+      set-cookie:
+      - JSESSIONID=a5wjk0g0ogbj1zldtg42lxyr;Path=/api, AWSELB=D5C1176F0665104977B708B0B48E6FFEC09E311CD10EE26CC6F86FEAE76E4BBB3D728D261CADA16D6256329826144A742E70346FDF2C8592D1FAF5BF2ABFF69B2FDD5A38FA;PATH=/
+      content-type:
+      - application/json
+      expires:
+      - Thu, 01-Jan-1970 00:00:00 GMT
+      cache-control:
+      - no-cache="set-cookie"
+    body:
+      string: "{\"sources\":[{\"id\":4605971,\"name\":\"prod_g5_712d_apache\",\"sourceType\":\"RemoteFile\",\"alive\":true,\"status\":\"\",\"multilineProcessingEnabled\":false,\"automaticDateParsing\":true,\"useAutolineMatching\":false,\"manualPrefixRegexp\":\"\",\"forceTimeZone\":false,\"defaultDateFormat\":\"\",\"hostName\":\"\",\"timeZone\":\"\",\"description\":\"\",\"filters\":[{\"filterType\":\"Exclude\",\"regexp\":\".*\\\\\\\"GET /up HTTP/1\\\\.0\\\\\\\".*\",\"name\":\"exclude health check\"},{\"filterType\":\"Exclude\",\"regexp\":\".*\\\\\\\"GET /server-status\\\\?auto HTTP/1\\\\.1\\\\\\\".*\",\"name\":\"exclude server-status\"}],\"category\":\"apache\",\"keyPath\":\"/home/sumo/.ssh/id_rsa\",\"authMethod\":\"key\",\"remotePort\":22,\"remotePassword\":\"\",\"keyPassword\":\"\",\"remotePath\":\"/var/log/apache2/access_log\",\"remoteHost\":\"10.184.51.125\",\"remoteUser\":\"root\"},{\"id\":4211699,\"name\":\"prod_srapi_rw_605c_apache\",\"sourceType\":\"RemoteFile\",\"alive\":true,\"status\":\"\",\"multilineProcessingEnabled\":false,\"automaticDateParsing\":true,\"useAutolineMatching\":false,\"manualPrefixRegexp\":\"\",\"forceTimeZone\":false,\"defaultDateFormat\":\"\",\"hostName\":\"\",\"timeZone\":\"\",\"description\":\"\",\"filters\":[{\"filterType\":\"Exclude\",\"regexp\":\".*\\\\\\\"GET /up HTTP/1\\\\.0\\\\\\\".*\",\"name\":\"exclude health check\"},{\"filterType\":\"Exclude\",\"regexp\":\".*\\\\\\\"GET /server-status\\\\?auto HTTP/1\\\\.1\\\\\\\".*\",\"name\":\"exclude server-status\"}],\"category\":\"apache\",\"keyPath\":\"/home/sumo/.ssh/id_rsa\",\"authMethod\":\"key\",\"remotePort\":22,\"remotePassword\":\"\",\"keyPassword\":\"\",\"remotePath\":\"/var/log/apache2/access_log\",\"remoteHost\":\"10.193.58.175\",\"remoteUser\":\"root\"},{\"id\":4211702,\"name\":\"prod_srapi_rw_606d_apache\",\"sourceType\":\"RemoteFile\",\"alive\":true,\"status\":\"\",\"multilineProcessingEnabled\":false,\"automaticDateParsing\":true,\"useAutolineMatching\":false,\"manualPrefixRegexp\":\"\",\"forceTimeZone\":false,\"defaultDateFormat\":\"\",\"hostName\":\"\",\"timeZone\":\"\",\"description\":\"\",\"filters\":[{\"filterType\":\"Exclude\",\"regexp\":\".*\\\\\\\"GET /up HTTP/1\\\\.0\\\\\\\".*\",\"name\":\"exclude health check\"},{\"filterType\":\"Exclude\",\"regexp\":\".*\\\\\\\"GET /server-status\\\\?auto HTTP/1\\\\.1\\\\\\\".*\",\"name\":\"exclude server-status\"}],\"category\":\"apache\",\"keyPath\":\"/home/sumo/.ssh/id_rsa\",\"authMethod\":\"key\",\"remotePort\":22,\"remotePassword\":\"\",\"keyPassword\":\"\",\"remotePath\":\"/var/log/apache2/access_log\",\"remoteHost\":\"10.242.42.92\",\"remoteUser\":\"root\"},{\"id\":4211704,\"name\":\"prod_srapi_rw_607c_apache\",\"sourceType\":\"RemoteFile\",\"alive\":true,\"status\":\"\",\"multilineProcessingEnabled\":false,\"automaticDateParsing\":true,\"useAutolineMatching\":false,\"manualPrefixRegexp\":\"\",\"forceTimeZone\":false,\"defaultDateFormat\":\"\",\"hostName\":\"\",\"timeZone\":\"\",\"description\":\"\",\"filters\":[{\"filterType\":\"Exclude\",\"regexp\":\".*\\\\\\\"GET /up HTTP/1\\\\.0\\\\\\\".*\",\"name\":\"exclude health check\"},{\"filterType\":\"Exclude\",\"regexp\":\".*\\\\\\\"GET /server-status\\\\?auto HTTP/1\\\\.1\\\\\\\".*\",\"name\":\"exclude server-status\"}],\"category\":\"apache\",\"keyPath\":\"/home/sumo/.ssh/id_rsa\",\"authMethod\":\"key\",\"remotePort\":22,\"remotePassword\":\"\",\"keyPassword\":\"\",\"remotePath\":\"/var/log/apache2/access_log\",\"remoteHost\":\"10.3.35.139\",\"remoteUser\":\"root\"},{\"id\":6705118,\"name\":\"test_apache\",\"sourceType\":\"RemoteFile\",\"alive\":true,\"status\":\"\",\"multilineProcessingEnabled\":false,\"automaticDateParsing\":true,\"useAutolineMatching\":false,\"manualPrefixRegexp\":\"\",\"forceTimeZone\":false,\"defaultDateFormat\":\"\",\"hostName\":\"\",\"timeZone\":\"\",\"description\":\"\",\"filters\":[{\"filterType\":\"Exclude\",\"regexp\":\".*\\\\\\\"GET /up HTTP/1\\\\.0\\\\\\\".*\",\"name\":\"exclude health check\"},{\"filterType\":\"Exclude\",\"regexp\":\".*\\\\\\\"GET /server-status\\\\?auto HTTP/1\\\\.1\\\\\\\".*\",\"name\":\"exclude server-status\"}],\"category\":\"apache\",\"keyPath\":\"/home/sumo/.ssh/id_rsa\",\"authMethod\":\"key\",\"remotePort\":22,\"remotePassword\":\"\",\"keyPassword\":\"\",\"remotePath\":\"/var/log/apache2/access_log\",\"remoteHost\":\"192.168.11.23\",\"remoteUser\":\"root\"},{\"id\":6732930,\"name\":\"test_existing_apache\",\"sourceType\":\"RemoteFile\",\"alive\":true,\"status\":\"\",\"multilineProcessingEnabled\":false,\"automaticDateParsing\":true,\"useAutolineMatching\":false,\"manualPrefixRegexp\":\"\",\"forceTimeZone\":false,\"defaultDateFormat\":\"\",\"hostName\":\"\",\"timeZone\":\"\",\"description\":\"\",\"filters\":[{\"filterType\":\"Exclude\",\"regexp\":\".*\\\\\\\"GET /up HTTP/1\\\\.0\\\\\\\".*\",\"name\":\"exclude health check\"},{\"filterType\":\"Exclude\",\"regexp\":\".*\\\\\\\"GET /server-status\\\\?auto HTTP/1\\\\.1\\\\\\\".*\",\"name\":\"exclude server-status\"}],\"category\":\"apache\",\"keyPath\":\"/home/sumo/.ssh/id_rsa\",\"authMethod\":\"key\",\"remotePort\":22,\"remotePassword\":\"\",\"keyPassword\":\"\",\"remotePath\":\"/var/log/apache2/access_log\",\"remoteHost\":\"192.168.11.23\",\"remoteUser\":\"root\"},{\"id\":6732928,\"name\":\"test_new_apache\",\"sourceType\":\"RemoteFile\",\"alive\":true,\"status\":\"\",\"multilineProcessingEnabled\":false,\"automaticDateParsing\":true,\"useAutolineMatching\":false,\"manualPrefixRegexp\":\"\",\"forceTimeZone\":false,\"defaultDateFormat\":\"\",\"hostName\":\"\",\"timeZone\":\"\",\"description\":\"\",\"filters\":[{\"filterType\":\"Exclude\",\"regexp\":\".*\\\\\\\"GET /up HTTP/1\\\\.0\\\\\\\".*\",\"name\":\"exclude health check\"},{\"filterType\":\"Exclude\",\"regexp\":\".*\\\\\\\"GET /server-status\\\\?auto HTTP/1\\\\.1\\\\\\\".*\",\"name\":\"exclude server-status\"}],\"category\":\"apache\",\"keyPath\":\"/home/sumo/.ssh/id_rsa\",\"authMethod\":\"key\",\"remotePort\":22,\"remotePassword\":\"\",\"keyPassword\":\"\",\"remotePath\":\"/var/log/apache2/access_log\",\"remoteHost\":\"192.168.11.23\",\"remoteUser\":\"root\"},{\"id\":4335684,\"name\":\"tst_g5_2_apache\",\"sourceType\":\"RemoteFile\",\"alive\":true,\"status\":\"\",\"multilineProcessingEnabled\":false,\"automaticDateParsing\":true,\"useAutolineMatching\":false,\"manualPrefixRegexp\":\"\",\"forceTimeZone\":false,\"defaultDateFormat\":\"\",\"hostName\":\"\",\"timeZone\":\"\",\"description\":\"\",\"filters\":[{\"filterType\":\"Exclude\",\"regexp\":\".*\\\\\\\"GET /up HTTP/1\\\\.0\\\\\\\".*\",\"name\":\"exclude health check\"},{\"filterType\":\"Exclude\",\"regexp\":\".*\\\\\\\"GET /server-status\\\\?auto HTTP/1\\\\.1\\\\\\\".*\",\"name\":\"exclude server-status\"}],\"category\":\"apache\",\"keyPath\":\"/home/sumo/.ssh/id_rsa\",\"authMethod\":\"key\",\"remotePort\":22,\"remotePassword\":\"\",\"keyPassword\":\"\",\"remotePath\":\"/var/log/apache2/access_log\",\"remoteHost\":\"10.166.78.3\",\"remoteUser\":\"root\"}]}"
+    http_version:
+  recorded_at: Sat, 26 Oct 2013 22:33:44 GMT
+- request:
+    method: get
+    uri: https://api.sumologic.com/api/v1/collectors/4216085/sources/6732930
+    body:
+      string: ""
+    headers:
+      User-Agent:
+      - Faraday v0.8.8
+      Authorization:
+      - Basic dGVzdEBleGFtcGxlLmNvbTpwYXNzd29yZA==
+  response:
+    status:
+      code: 200
+      message:
+    headers:
+      content-length:
+      - "755"
+      etag:
+      - "\"33bdab4d61bef9dc4a9358b422258d01\""
+      date:
+      - Sat, 26 Oct 2013 22:33:45 GMT
+      strict-transport-security:
+      - max-age=604800
+      connection:
+      - Close
+      set-cookie:
+      - JSESSIONID=16mibhfub6mkp1k42leqg91a0d;Path=/api, AWSELB=D5C1176F0665104977B708B0B48E6FFEC09E311CD187FB89816B52B1211CB2A427CDAEE07C84C78ACDE8F27A082951A6B1D53BEF265A47B963505780F0539FE2C401551BD7;PATH=/
+      content-type:
+      - application/json
+      expires:
+      - Thu, 01-Jan-1970 00:00:00 GMT
+      cache-control:
+      - no-cache="set-cookie"
+    body:
+      string: "{\"source\":{\"id\":6732930,\"name\":\"test_existing_apache\",\"sourceType\":\"RemoteFile\",\"alive\":true,\"status\":\"\",\"automaticDateParsing\":true,\"multilineProcessingEnabled\":false,\"useAutolineMatching\":false,\"manualPrefixRegexp\":\"\",\"forceTimeZone\":false,\"defaultDateFormat\":\"\",\"hostName\":\"\",\"timeZone\":\"\",\"description\":\"\",\"filters\":[{\"filterType\":\"Exclude\",\"regexp\":\".*\\\\\\\"GET /up HTTP/1\\\\.0\\\\\\\".*\",\"name\":\"exclude health check\"},{\"filterType\":\"Exclude\",\"regexp\":\".*\\\\\\\"GET /server-status\\\\?auto HTTP/1\\\\.1\\\\\\\".*\",\"name\":\"exclude server-status\"}],\"category\":\"apache\",\"keyPath\":\"/home/sumo/.ssh/id_rsa\",\"authMethod\":\"key\",\"remotePort\":22,\"remotePassword\":\"\",\"keyPassword\":\"\",\"remotePath\":\"/var/log/apache2/access_log\",\"remoteHost\":\"192.168.11.23\",\"remoteUser\":\"root\"}}"
+    http_version:
+  recorded_at: Sat, 26 Oct 2013 22:33:46 GMT
+- request:
+    method: put
+    uri: https://api.sumologic.com/api/v1/collectors/4216085/sources/6732930
+    body:
+      string: "{\"source\":{\"remotePassword\":\"\",\"id\":6732930,\"keyPassword\":\"\",\"useAutolineMatching\":false,\"timeZone\":\"\",\"hostName\":\"\",\"manualPrefixRegexp\":\"\",\"name\":\"test_existing_apache\",\"category\":\"apache\",\"defaultDateFormat\":\"\",\"sourceType\":\"RemoteFile\",\"authMethod\":\"key\",\"remoteUser\":\"root\",\"remotePath\":\"/var/log/apache2/access_log\",\"remotePort\":22,\"forceTimeZone\":false,\"automaticDateParsing\":true,\"status\":\"\",\"filters\":[{\"name\":\"exclude health check\",\"regexp\":\".*\\\\\\\"GET /up HTTP/1\\\\.0\\\\\\\".*\",\"filterType\":\"Exclude\"},{\"name\":\"exclude server-status\",\"regexp\":\".*\\\\\\\"GET /server-status\\\\?auto HTTP/1\\\\.1\\\\\\\".*\",\"filterType\":\"Exclude\"}],\"multilineProcessingEnabled\":false,\"remoteHost\":\"192.168.11.23\",\"keyPath\":\"/home/sumo/.ssh/id_rsa\",\"description\":\"\",\"alive\":true}}"
+    headers:
+      If-Match:
+      - "\"33bdab4d61bef9dc4a9358b422258d01\""
+      Content-Type:
+      - application/json
+      User-Agent:
+      - Faraday v0.8.8
+      Authorization:
+      - Basic dGVzdEBleGFtcGxlLmNvbTpwYXNzd29yZA==
+  response:
+    status:
+      code: 200
+      message:
+    headers:
+      etag:
+      - "\"33bdab4d61bef9dc4a9358b422258d01\""
+      date:
+      - Sat, 26 Oct 2013 22:33:46 GMT
+      strict-transport-security:
+      - max-age=604800
+      connection:
+      - Close
+      transfer-encoding:
+      - chunked
+      set-cookie:
+      - JSESSIONID=19phj5yenzuonkg1bft6k7xcb;Path=/api, AWSELB=D5C1176F0665104977B708B0B48E6FFEC09E311CD187FB89816B52B1211CB2A427CDAEE07C84C78ACDE8F27A082951A6B1D53BEF265A47B963505780F0539FE2C401551BD7;PATH=/
+      content-type:
+      - application/json
+      expires:
+      - Thu, 01-Jan-1970 00:00:00 GMT
+      cache-control:
+      - no-cache="set-cookie"
+    body:
+      string: "{\"source\":{\"id\":6732930,\"name\":\"test_existing_apache\",\"sourceType\":\"RemoteFile\",\"alive\":true,\"status\":\"\",\"automaticDateParsing\":true,\"multilineProcessingEnabled\":false,\"useAutolineMatching\":false,\"manualPrefixRegexp\":\"\",\"forceTimeZone\":false,\"defaultDateFormat\":\"\",\"hostName\":\"\",\"timeZone\":\"\",\"description\":\"\",\"filters\":[{\"filterType\":\"Exclude\",\"regexp\":\".*\\\\\\\"GET /up HTTP/1\\\\.0\\\\\\\".*\",\"name\":\"exclude health check\"},{\"filterType\":\"Exclude\",\"regexp\":\".*\\\\\\\"GET /server-status\\\\?auto HTTP/1\\\\.1\\\\\\\".*\",\"name\":\"exclude server-status\"}],\"category\":\"apache\",\"keyPath\":\"/home/sumo/.ssh/id_rsa\",\"authMethod\":\"key\",\"remotePort\":22,\"remotePassword\":\"\",\"keyPassword\":\"\",\"remotePath\":\"/var/log/apache2/access_log\",\"remoteHost\":\"192.168.11.23\",\"remoteUser\":\"root\"}}"
+    http_version:
+  recorded_at: Sat, 26 Oct 2013 22:33:48 GMT
+recorded_with: VCR 2.6.0
