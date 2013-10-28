@@ -5,6 +5,7 @@ require File.expand_path('../sumo_control/source_definition', __FILE__)
 require File.expand_path('../sumo_control/client', __FILE__)
 
 module SumoControl
+  Error = Class.new(StandardError)
 
   def conn_sumo(user, password)
     @client = Client.new(user, password)
@@ -72,8 +73,7 @@ private
 
     puts "Sumologic Source Id: #{source_id}"
     if !source_id
-      puts "Invalid Sumologic Source ID returned. Exiting!"
-      exit(1)
+      raise SumoControl::Error, "Invalid Sumologic Source ID returned. Exiting!"
     else
       puts "Writing source id #{source_id} to #{id_file_path}"
       File.open(id_file_path, "a") do |f|
