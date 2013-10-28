@@ -18,6 +18,10 @@ module SumoControl
       connection.get "/api/v1/collectors/#{collector_id}/sources"
     end
 
+    def source(collector_id, source_id)
+      connection.get "/api/v1/collectors/#{collector_id}/sources/#{source_id}"
+    end
+
     def create_source(collector_id, source_definition)
       connection.post do |req|
         req.url "/api/v1/collectors/#{collector_id}/sources"

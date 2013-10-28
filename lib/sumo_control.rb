@@ -54,12 +54,15 @@ private
   def update_server_source(source_name, host_ip, collector_id, sumo_connection)
     sumo_api_path = "/api/v1/collectors/#{collector_id}/sources"
     search_response = client.sources(collector_id)
+
     sources = JSON.parse(search_response.body)
     matched = sources['sources'].map do |source|
       source['name'] == source_name ? source : nil
     end.compact.first
-    source_response = sumo_connection.get "#{sumo_api_path}/#{matched['id']}"
+
+    source_response = client.source(collector_id, matched['id'])
     matched['remoteHost'] = host_ip
+
     update_response = sumo_connection.put do |req|
       req.url "#{sumo_api_path}/#{matched['id']}"
       req.body = {:source => matched}.to_json
