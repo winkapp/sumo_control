@@ -56,9 +56,7 @@ private
     search_response = client.sources(collector_id)
 
     sources = JSON.parse(search_response.body)
-    matched = sources['sources'].map do |source|
-      source['name'] == source_name ? source : nil
-    end.compact.first
+    matched = sources['sources'].detect{|source| source['name'] == source_name}
 
     source_response = client.source(collector_id, matched['id'])
     matched['remoteHost'] = host_ip
