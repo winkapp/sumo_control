@@ -16,6 +16,17 @@ module SumoControl
     return conn
   end
 
+  def sumo_add_or_update(category, source_name, host_ip, log_path, id_file_path, collector_id, sumo_connection)
+    add_or_update_response = add_server_source(category, source_name, host_ip, log_path, collector_id, sumo_connection)
+    if add_or_update_response.status == 400 && JSON.parse(add_or_update_response.body)['code'] == 'collectors.validation.name.duplicate'
+      add_or_update_response = update_server_source(source_name, host_ip, collector_id, sumo_connection)
+    end
+    store_source_id(add_or_update_response, id_file_path) if add_or_update_response.status < 400
+    return add_or_update_response
+  end
+
+private
+
   def apache_filters
     [
       {
@@ -30,17 +41,6 @@ module SumoControl
       }
     ]
   end
-
-  def sumo_add_or_update(category, source_name, host_ip, log_path, id_file_path, collector_id, sumo_connection)
-    add_or_update_response = add_server_source(category, source_name, host_ip, log_path, collector_id, sumo_connection)
-    if add_or_update_response.status == 400 && JSON.parse(add_or_update_response.body)['code'] == 'collectors.validation.name.duplicate'
-      add_or_update_response = update_server_source(source_name, host_ip, collector_id, sumo_connection)
-    end
-    store_source_id(add_or_update_response, id_file_path) if add_or_update_response.status < 400
-    return add_or_update_response
-  end
-
-protected
 
   def add_server_source(category, source_name, host_ip, log_path, collector_id, sumo_connection)
     source_definition = SourceDefinition.new(category, source_name, host_ip, log_path, send("#{category}_filters"))
