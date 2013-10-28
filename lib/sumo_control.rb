@@ -22,6 +22,8 @@ module SumoControl
 
 private
 
+  attr_reader :client
+
   def apache_filters
     [
       {
@@ -46,13 +48,7 @@ private
     puts "ip=#{host_ip}"
     puts "server name=#{source_name}"
 
-    response = sumo_connection.post do |req|
-      req.url "/api/v1/collectors/#{collector_id}/sources"
-      req.headers['Content-Type'] = 'application/json'
-      req.body = source_definition.to_json
-    end
-
-    return response
+    client.create_source(collector_id, source_definition)
   end
 
   def update_server_source(source_name, host_ip, collector_id, sumo_connection)

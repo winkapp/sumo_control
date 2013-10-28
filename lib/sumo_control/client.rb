@@ -11,10 +11,15 @@ module SumoControl
         r.response :logger
         r.adapter Faraday.default_adapter
       end
-
       @connection.basic_auth(user, password)
+    end
 
-      @connection
+    def create_source(collector_id, source_definition)
+      connection.post do |req|
+        req.url "/api/v1/collectors/#{collector_id}/sources"
+        req.headers['Content-Type'] = 'application/json'
+        req.body = source_definition.to_json
+      end
     end
   end
 end
