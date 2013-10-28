@@ -63,13 +63,7 @@ private
     source_response = client.source(collector_id, matched['id'])
     matched['remoteHost'] = host_ip
 
-    update_response = sumo_connection.put do |req|
-      req.url "#{sumo_api_path}/#{matched['id']}"
-      req.body = {:source => matched}.to_json
-      req.headers['Content-Type'] = 'application/json'
-      req.headers['If-Match'] = source_response.headers['etag']
-    end
-    return update_response
+    client.update_source(collector_id, matched['id'], matched, source_response.headers['etag'])
   end
 
 

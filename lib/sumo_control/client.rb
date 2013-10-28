@@ -29,5 +29,14 @@ module SumoControl
         req.body = source_definition.to_json
       end
     end
+
+    def update_source(collector_id, source_id, source, version)
+      connection.put do |req|
+        req.url "/api/v1/collectors/#{collector_id}/sources/#{source_id}"
+        req.body = {:source => source}.to_json
+        req.headers['Content-Type'] = 'application/json'
+        req.headers['If-Match'] = version
+      end
+    end
   end
 end
