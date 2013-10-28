@@ -4,10 +4,11 @@ describe SumoControl, :vcr do
   let(:sumo) do
     Class.new do
       include SumoControl
-    end.new
+    end.new.tap do |sumo|
+      sumo.conn_sumo(user, password)
+    end
   end
 
-  let(:api_host){'https://api.sumologic.com'}
   let(:user){'test@example.com'}
   let(:password){'password'}
 
@@ -17,8 +18,7 @@ describe SumoControl, :vcr do
   let(:source){"#{host_name}_#{category}"}
   let(:log_file_path){'/var/log/apache2/access_log'}
 
-  let(:sumo_connection){sumo.conn_sumo(api_host, user, password)}
-  let!(:response){sumo.sumo_add_or_update(category, source, host_ip, log_file_path, id_file_path, collector_id, sumo_connection)}
+  let!(:response){sumo.sumo_add_or_update(category, source, host_ip, log_file_path, id_file_path, collector_id)}
   subject{response}
   let(:actual_source_id){JSON.parse(response.body)['source']['id']}
 

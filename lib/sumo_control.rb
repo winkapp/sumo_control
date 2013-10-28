@@ -6,15 +6,14 @@ require File.expand_path('../sumo_control/client', __FILE__)
 
 module SumoControl
 
-  def conn_sumo(host, user, password)
+  def conn_sumo(user, password)
     @client = Client.new(user, password)
-    @client.connection
   end
 
-  def sumo_add_or_update(category, source_name, host_ip, log_path, id_file_path, collector_id, sumo_connection)
-    add_or_update_response = add_server_source(category, source_name, host_ip, log_path, collector_id, sumo_connection)
+  def sumo_add_or_update(category, source_name, host_ip, log_path, id_file_path, collector_id)
+    add_or_update_response = add_server_source(category, source_name, host_ip, log_path, collector_id)
     if add_or_update_response.status == 400 && JSON.parse(add_or_update_response.body)['code'] == 'collectors.validation.name.duplicate'
-      add_or_update_response = update_server_source(source_name, host_ip, collector_id, sumo_connection)
+      add_or_update_response = update_server_source(source_name, host_ip, collector_id)
     end
     store_source_id(add_or_update_response, id_file_path) if add_or_update_response.status < 400
     return add_or_update_response
@@ -39,7 +38,7 @@ private
     ]
   end
 
-  def add_server_source(category, source_name, host_ip, log_path, collector_id, sumo_connection)
+  def add_server_source(category, source_name, host_ip, log_path, collector_id)
     source_definition = SourceDefinition.new(category, source_name, host_ip, log_path, send("#{category}_filters"))
 
     print "json_msg="
@@ -51,7 +50,7 @@ private
     client.create_source(collector_id, source_definition)
   end
 
-  def update_server_source(source_name, host_ip, collector_id, sumo_connection)
+  def update_server_source(source_name, host_ip, collector_id)
     sumo_api_path = "/api/v1/collectors/#{collector_id}/sources"
     search_response = client.sources(collector_id)
 
