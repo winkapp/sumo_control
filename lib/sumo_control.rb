@@ -2,18 +2,13 @@ require 'rubygems'
 require 'json'
 require 'faraday'
 require File.expand_path('../sumo_control/source_definition', __FILE__)
+require File.expand_path('../sumo_control/client', __FILE__)
 
 module SumoControl
 
   def conn_sumo(host, user, password)
-    host ||= 'https://api.sumologic.com'
-    conn = Faraday.new(:url => host) do |r|
-      r.response :logger
-      r.adapter Faraday.default_adapter
-    end
-
-    conn.basic_auth(user, password)
-    return conn
+    @client = Client.new(user, password)
+    @client.connection
   end
 
   def sumo_add_or_update(category, source_name, host_ip, log_path, id_file_path, collector_id, sumo_connection)
