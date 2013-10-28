@@ -1,6 +1,7 @@
 require 'rubygems'
 require 'json'
 require 'faraday'
+require File.expand_path('../sumo_control/source_definition', __FILE__)
 
 module SumoControl
 
@@ -27,7 +28,7 @@ module SumoControl
         :name => "exclude server-status",
         :regexp => /.*\"GET \/server-status\?auto HTTP\/1\.1\".*/.inspect[1...-1]
       }
-    ].to_json
+    ]
   end
 
   def sumo_add_or_update(category, source_name, host_ip, log_path, id_file_path, collector_id, sumo_connection)
@@ -42,36 +43,7 @@ module SumoControl
 protected
 
   def add_server_source(category, source_name, host_ip, log_path, collector_id, sumo_connection)
-    source_definition = %(
-      {
-        "source":
-        {
-          "alive": true,
-          "authMethod": "key",
-          "automaticDateParsing": true,
-          "category": "#{category}",
-          "defaultDateFormat": "",
-          "description": "",
-          "filters": #{send("#{category}_filters")},
-          "forceTimeZone": false,
-          "hostName": "",
-          "keyPassword": "",
-          "keyPath": "/home/sumo/.ssh/id_rsa",
-          "manualPrefixRegexp": "",
-          "multilineProcessingEnabled": false,
-          "name": "#{source_name}",
-          "remoteHost": "#{host_ip}",
-          "remotePassword": "",
-          "remotePath": "#{log_path}",
-          "remotePort": 22,
-          "remoteUser": "root",
-          "sourceType": "RemoteFile",
-          "status": "",
-          "timeZone": "",
-          "useAutolineMatching": false
-        }
-      }
-    )
+    source_definition = SourceDefinition.new(category, source_name, host_ip, log_path, send("#{category}_filters"))
 
     print "json_msg="
     puts source_definition
@@ -82,7 +54,7 @@ protected
     response = sumo_connection.post do |req|
       req.url "/api/v1/collectors/#{collector_id}/sources"
       req.headers['Content-Type'] = 'application/json'
-      req.body = source_definition
+      req.body = source_definition.to_json
     end
 
     return response
