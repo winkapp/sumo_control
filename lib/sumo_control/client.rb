@@ -14,6 +14,10 @@ module SumoControl
       @connection.basic_auth(user, password)
     end
 
+    def sources(collector_id)
+      connection.get "/api/v1/collectors/#{collector_id}/sources"
+    end
+
     def create_source(collector_id, source_definition)
       connection.post do |req|
         req.url "/api/v1/collectors/#{collector_id}/sources"

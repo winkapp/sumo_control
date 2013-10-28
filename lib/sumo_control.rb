@@ -53,7 +53,7 @@ private
 
   def update_server_source(source_name, host_ip, collector_id, sumo_connection)
     sumo_api_path = "/api/v1/collectors/#{collector_id}/sources"
-    search_response = sumo_connection.get sumo_api_path
+    search_response = client.sources(collector_id)
     sources = JSON.parse(search_response.body)
     matched = sources['sources'].map do |source|
       source['name'] == source_name ? source : nil
