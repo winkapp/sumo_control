@@ -56,5 +56,11 @@ describe SumoControl, :vcr do
     it "writes the source id from the response to a file" do
       File.read(id_file_path).should =~ /^#{expected_source_id}$/
     end
+
+    after(:each) do
+      File.open(id_file_path, 'w') do |f|
+        f.write("#{expected_source_id}\n") #reset file
+      end
+    end
   end
 end

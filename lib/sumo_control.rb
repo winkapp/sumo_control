@@ -4,7 +4,8 @@ require 'faraday'
 
 module SumoControl
 
-  def conn_sumo(host='https://api.sumologic.com', user=nil, password=nil)
+  def conn_sumo(host, user, password)
+    host ||= 'https://api.sumologic.com'
     conn = Faraday.new(:url => host) do |r|
       r.response :logger
       r.adapter Faraday.default_adapter
@@ -29,7 +30,7 @@ module SumoControl
     ].to_json
   end
 
-  def sumo_add_or_update(category='apache', source_name=nil, host_ip=nil, log_path=nil, id_file_path=nil, collector_id=nil, sumo_connection=nil)
+  def sumo_add_or_update(category, source_name, host_ip, log_path, id_file_path, collector_id, sumo_connection)
     add_or_update_response = add_server_source(category, source_name, host_ip, log_path, collector_id, sumo_connection)
     if add_or_update_response.status == 400 && JSON.parse(add_or_update_response.body)['code'] == 'collectors.validation.name.duplicate'
       add_or_update_response = update_server_source(source_name, host_ip, collector_id, sumo_connection)
@@ -40,7 +41,7 @@ module SumoControl
 
 protected
 
-  def add_server_source(category='apache', source_name=nil, host_ip=nil, log_path=nil, collector_id=nil, sumo_connection=nil)
+  def add_server_source(category, source_name, host_ip, log_path, collector_id, sumo_connection)
     source_definition = %(
       {
         "source":
@@ -87,7 +88,7 @@ protected
     return response
   end
 
-  def update_server_source(source_name=nil, host_ip=nil, collector_id=nil, sumo_connection=nil)
+  def update_server_source(source_name, host_ip, collector_id, sumo_connection)
     sumo_api_path = "/api/v1/collectors/#{collector_id}/sources"
     search_response = sumo_connection.get sumo_api_path
     sources = JSON.parse(search_response.body)
@@ -106,7 +107,7 @@ protected
   end
 
 
-  def store_source_id(response_object, id_file_path=nil)
+  def store_source_id(response_object, id_file_path)
     json_response=response_object.body
     puts "Sumo Logic JSON response: #{json_response}"
 
