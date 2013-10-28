@@ -80,9 +80,9 @@ private
       exit(1)
     else
       puts "Writing source id #{source_id} to #{id_file_path}"
-      f = File.new(id_file_path,"a")
-      f.puts(source_id)
-      f.close
+      File.open(id_file_path, "a") do |f|
+        f.puts(source_id)
+      end
     end
 
   end
