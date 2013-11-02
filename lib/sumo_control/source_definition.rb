@@ -1,6 +1,6 @@
 require 'json'
 
-module SumoControl
+class SumoControl
   class SourceDefinition
     def initialize(category, source_name, host_ip, log_path, filters)
       @category, @source_name, @host_ip, @log_path, @filters = category, source_name, host_ip, log_path, filters

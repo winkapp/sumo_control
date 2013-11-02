@@ -4,14 +4,14 @@ require 'faraday'
 require File.expand_path('../sumo_control/source_definition', __FILE__)
 require File.expand_path('../sumo_control/client', __FILE__)
 
-module SumoControl
+class SumoControl
   Error = Class.new(StandardError)
 
-  def conn_sumo(user, password)
+  def initialize(user, password)
     @client = Client.new(user, password)
   end
 
-  def sumo_add_or_update(category, source_name, host_ip, log_path, id_file_path, collector_id)
+  def register(category, source_name, host_ip, log_path, id_file_path, collector_id)
     add_or_update_response = add_server_source(category, source_name, host_ip, log_path, collector_id)
     if add_or_update_response.status == 400 && JSON.parse(add_or_update_response.body)['code'] == 'collectors.validation.name.duplicate'
       add_or_update_response = update_server_source(source_name, host_ip, collector_id)

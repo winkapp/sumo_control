@@ -1,6 +1,6 @@
 require 'faraday'
 
-module SumoControl
+class SumoControl
   class Client
     API_HOST = 'https://api.sumologic.com'
 
