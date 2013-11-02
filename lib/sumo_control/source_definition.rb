@@ -7,6 +7,14 @@ module SumoControl
     end
 
     def to_json
+      to_h.to_json
+    end
+
+    def to_s
+      to_h.inspect
+    end
+
+    def to_h
       {'source' => {
         "alive" => true,
         "authMethod" => "key",
@@ -31,8 +39,7 @@ module SumoControl
         "status" => "",
         "timeZone" => "",
         "useAutolineMatching" => false
-      }}.to_json
+      }}
     end
-    alias_method :to_json, :to_s
   end
 end
