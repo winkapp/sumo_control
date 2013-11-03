@@ -30,12 +30,12 @@ class SumoControl
       end
     end
 
-    def update_source(collector_id, source_id, source, version)
+    def update_source(collector_id, source_definition)
       connection.put do |req|
-        req.url "/api/v1/collectors/#{collector_id}/sources/#{source_id}"
-        req.body = {:source => source}.to_json
+        req.url "/api/v1/collectors/#{collector_id}/sources/#{source_definition.id}"
+        req.body = source_definition.to_json
         req.headers['Content-Type'] = 'application/json'
-        req.headers['If-Match'] = version
+        req.headers['If-Match'] = source_definition.version
       end
     end
   end

@@ -61,9 +61,10 @@ private
     matched = sources['sources'].detect{|source| source['name'] == source_definition.name}
 
     source_response = client.source(collector_id, matched['id'])
-    matched['remoteHost'] = source_definition.remote_host
+    source_definition.id = matched['id']
+    source_definition.version = source_response.headers['etag']
 
-    client.update_source(collector_id, matched['id'], matched, source_response.headers['etag'])
+    client.update_source(collector_id, source_definition)
   end
 
 

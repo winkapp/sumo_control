@@ -29,10 +29,10 @@ class SumoControl
     }
     FIELDS = DEFAULTS.keys
 
-    attr_accessor *FIELDS
+    attr_accessor :id, :version, *FIELDS
 
     def initialize(attributes = {})
-      attributes.each do |key, value|
+      DEFAULTS.merge(attributes).each do |key, value|
         writer = :"#{key}="
         send(writer, value) if respond_to?(writer)
       end
@@ -43,7 +43,10 @@ class SumoControl
     end
 
     def to_s
-      to_h.inspect
+      to_h.merge(
+        :id => id,
+        :version => version
+      ).inspect
     end
 
     def to_h
