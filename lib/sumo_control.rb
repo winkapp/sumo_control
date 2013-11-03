@@ -1,8 +1,9 @@
 require 'rubygems'
 require 'json'
-require 'faraday'
+
 require File.expand_path('../sumo_control/source_definition', __FILE__)
 require File.expand_path('../sumo_control/client', __FILE__)
+require File.expand_path('../sumo_control/filters', __FILE__)
 
 class SumoControl
   Error = Class.new(StandardError)
@@ -28,18 +29,7 @@ private
   attr_reader :client
 
   def apache_filters
-    [
-      {
-        :filterType => "Exclude",
-        :name => "exclude health check",
-        :regexp => /.*\"GET \/up HTTP\/1\.0\".*/.inspect[1...-1]
-      },
-      {
-        :filterType => "Exclude",
-        :name => "exclude server-status",
-        :regexp => /.*\"GET \/server-status\?auto HTTP\/1\.1\".*/.inspect[1...-1]
-      }
-    ]
+    COMMON_APACHE_FILTERS
   end
 
   def add_server_source(collector_id, source_definition)
