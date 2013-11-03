@@ -2,8 +2,40 @@ require 'json'
 
 class SumoControl
   class SourceDefinition
-    def initialize(category, source_name, host_ip, log_path, filters)
-      @category, @source_name, @host_ip, @log_path, @filters = category, source_name, host_ip, log_path, filters
+    DEFAULTS = {
+      :alive => true,
+      :auth_method => 'key',
+      :automatic_date_parsing => true,
+      :category => '',
+      :default_date_format => '',
+      :description => '',
+      :filters => [],
+      :force_time_zone => false,
+      :host_name => '',
+      :key_password => '',
+      :key_path => '/home/sumo/.ssh/id_rsa',
+      :manual_prefix_regexp => '',
+      :multiline_processing_enabled => false,
+      :name => '',
+      :remote_host => '',
+      :remote_password => '',
+      :remote_path => '',
+      :remote_port => 22,
+      :remote_user => 'root',
+      :source_type => 'RemoteFile',
+      :status => '',
+      :time_zone => '',
+      :user_autoline_matching => false
+    }
+    FIELDS = DEFAULTS.keys
+
+    attr_accessor *FIELDS
+
+    def initialize(attributes = {})
+      attributes.each do |key, value|
+        writer = :"#{key}="
+        send(writer, value) if respond_to?(writer)
+      end
     end
 
     def to_json
@@ -15,31 +47,21 @@ class SumoControl
     end
 
     def to_h
-      {'source' => {
-        "alive" => true,
-        "authMethod" => "key",
-        "automaticDateParsing" => true,
-        "category" => @category,
-        "defaultDateFormat" => "",
-        "description" => "",
-        "filters" => @filters,
-        "forceTimeZone" => false,
-        "hostName" => "",
-        "keyPassword" => "",
-        "keyPath" => "/home/sumo/.ssh/id_rsa",
-        "manualPrefixRegexp" => "",
-        "multilineProcessingEnabled" => false,
-        "name" => @source_name,
-        "remoteHost" => @host_ip,
-        "remotePassword" => "",
-        "remotePath" => @log_path,
-        "remotePort" => 22,
-        "remoteUser" => "root",
-        "sourceType" => "RemoteFile",
-        "status" => "",
-        "timeZone" => "",
-        "useAutolineMatching" => false
-      }}
+      definition = Hash[
+        FIELDS.map do |field|
+          [lower_camelize(field), send(field)]
+        end
+      ]
+
+      {'source' => definition}
+    end
+
+  private
+
+    def lower_camelize(term)
+      first, *others = term.to_s.split(/_/)
+      others.map!(&:capitalize)
+      [first, *others].join
     end
   end
 end

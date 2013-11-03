@@ -40,7 +40,13 @@ private
   end
 
   def add_server_source(category, source_name, host_ip, log_path, collector_id)
-    source_definition = SourceDefinition.new(category, source_name, host_ip, log_path, send("#{category}_filters"))
+    source_definition = SourceDefinition.new(
+      :category => category,
+      :name => source_name,
+      :remote_host => host_ip,
+      :remote_path => log_path,
+      :filters => send("#{category}_filters")
+    )
 
     print "json_msg="
     puts source_definition

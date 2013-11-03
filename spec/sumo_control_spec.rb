@@ -41,7 +41,7 @@ describe SumoControl, :vcr do
     let(:id_file_path){fixture_path + '/existing_sumo_source.txt'}
     let(:expected_source_id){6732930}
 
-    its(:status){should eql(200)} # created
+    its(:status){should eql(200)} # success
 
     it "responds with the source id of the new source" do
       actual_source_id.should eql(expected_source_id)
