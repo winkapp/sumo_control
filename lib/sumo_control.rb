@@ -2,6 +2,7 @@ require 'rubygems'
 require 'json'
 
 require File.expand_path('../sumo_control/source_definition', __FILE__)
+require File.expand_path('../sumo_control/source_entry', __FILE__)
 require File.expand_path('../sumo_control/client', __FILE__)
 require File.expand_path('../sumo_control/filters', __FILE__)
 
@@ -42,10 +43,12 @@ private
     search_response = client.sources(collector_id)
 
     sources = JSON.parse(search_response.body)
-    matched = sources['sources'].detect{|source| source['name'] == source_definition.name}
+    matched = sources['sources'].map do |source|
+      SourceEntry.new(source)
+    end.detect{|source| source.name == source_definition.name}
 
-    source_response = client.source(collector_id, matched['id'])
-    source_definition.id = matched['id']
+    source_response = client.source(collector_id, matched.id)
+    source_definition.id = matched.id
     source_definition.version = source_response.headers['etag']
 
     client.update_source(collector_id, source_definition)
