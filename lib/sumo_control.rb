@@ -17,7 +17,7 @@ class SumoControl
 
     add_or_update_response = add_server_source(collector_id, source_definition)
     if add_or_update_response.status == 400 && JSON.parse(add_or_update_response.body)['code'] == 'collectors.validation.name.duplicate'
-      add_or_update_response = update_server_source(source_definition.name, source_definition.remote_host, collector_id)
+      add_or_update_response = update_server_source(collector_id, source_definition)
     end
     store_source_id(add_or_update_response, id_file_path) if add_or_update_response.status < 400
     return add_or_update_response
@@ -54,14 +54,14 @@ private
     client.create_source(collector_id, source_definition)
   end
 
-  def update_server_source(source_name, host_ip, collector_id)
+  def update_server_source(collector_id, source_definition)
     search_response = client.sources(collector_id)
 
     sources = JSON.parse(search_response.body)
-    matched = sources['sources'].detect{|source| source['name'] == source_name}
+    matched = sources['sources'].detect{|source| source['name'] == source_definition.name}
 
     source_response = client.source(collector_id, matched['id'])
-    matched['remoteHost'] = host_ip
+    matched['remoteHost'] = source_definition.remote_host
 
     client.update_source(collector_id, matched['id'], matched, source_response.headers['etag'])
   end
