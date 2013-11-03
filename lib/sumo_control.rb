@@ -45,7 +45,7 @@ private
     sources = JSON.parse(search_response.body)
     matched = sources['sources'].map do |source|
       SourceEntry.new(source)
-    end.detect{|source| source.name == source_definition.name}
+    end.detect{|source| source == source_definition}
 
     source_response = client.source(collector_id, matched.id)
     source_definition.id = matched.id

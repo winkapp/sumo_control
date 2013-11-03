@@ -8,5 +8,9 @@ class SumoControl
         send(writer, value) if respond_to?(writer)
       end
     end
+
+    def ==(other)
+      name == other.name
+    end
   end
 end
