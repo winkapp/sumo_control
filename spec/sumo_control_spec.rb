@@ -18,6 +18,7 @@ describe SumoControl, :vcr do
       source.name = name
       source.remote_host = host_ip
       source.remote_path = log_file_path
+      source.filters = SumoControl::COMMON_APACHE_FILTERS
     end
   end
   subject{response}

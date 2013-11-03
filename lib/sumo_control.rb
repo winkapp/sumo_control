@@ -28,13 +28,7 @@ private
 
   attr_reader :client
 
-  def apache_filters
-    COMMON_APACHE_FILTERS
-  end
-
   def add_server_source(collector_id, source_definition)
-    source_definition.filters = send("#{source_definition.category}_filters")
-
     print "json_msg="
     puts source_definition
     puts
