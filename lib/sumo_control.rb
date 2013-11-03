@@ -11,10 +11,13 @@ class SumoControl
     @client = Client.new(user, password)
   end
 
-  def register(category, source_name, host_ip, log_path, id_file_path, collector_id)
-    add_or_update_response = add_server_source(category, source_name, host_ip, log_path, collector_id)
+  def register(collector_id, id_file_path)
+    source_definition = SourceDefinition.new
+    yield source_definition
+
+    add_or_update_response = add_server_source(collector_id, source_definition)
     if add_or_update_response.status == 400 && JSON.parse(add_or_update_response.body)['code'] == 'collectors.validation.name.duplicate'
-      add_or_update_response = update_server_source(source_name, host_ip, collector_id)
+      add_or_update_response = update_server_source(source_definition.name, source_definition.remote_host, collector_id)
     end
     store_source_id(add_or_update_response, id_file_path) if add_or_update_response.status < 400
     return add_or_update_response
@@ -39,20 +42,14 @@ private
     ]
   end
 
-  def add_server_source(category, source_name, host_ip, log_path, collector_id)
-    source_definition = SourceDefinition.new(
-      :category => category,
-      :name => source_name,
-      :remote_host => host_ip,
-      :remote_path => log_path,
-      :filters => send("#{category}_filters")
-    )
+  def add_server_source(collector_id, source_definition)
+    source_definition.filters = send("#{source_definition.category}_filters")
 
     print "json_msg="
     puts source_definition
     puts
-    puts "ip=#{host_ip}"
-    puts "server name=#{source_name}"
+    puts "ip=#{source_definition.remote_host}"
+    puts "server name=#{source_definition.name}"
 
     client.create_source(collector_id, source_definition)
   end

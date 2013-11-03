@@ -9,10 +9,17 @@ describe SumoControl, :vcr do
   let(:collector_id){'4216085'}
   let(:host_ip){'192.168.11.23'}
   let(:category){'apache'}
-  let(:source){"#{host_name}_#{category}"}
+  let(:name){"#{host_name}_#{category}"}
   let(:log_file_path){'/var/log/apache2/access_log'}
 
-  let!(:response){sumo.register(category, source, host_ip, log_file_path, id_file_path, collector_id)}
+  let!(:response) do
+    sumo.register(collector_id, id_file_path) do |source|
+      source.category = category
+      source.name = name
+      source.remote_host = host_ip
+      source.remote_path = log_file_path
+    end
+  end
   subject{response}
   let(:actual_source_id){JSON.parse(response.body)['source']['id']}
 
