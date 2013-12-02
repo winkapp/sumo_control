@@ -35,9 +35,7 @@ private
   end
 
   def remote_source_definition(collector_id, source_definition)
-    source_id = lookup_source_id(collector_id, source_definition)
-
-    client.source(collector_id, source_id)
+    client.source(collector_id, lookup_source_id(collector_id, source_definition))
   end
 
   def lookup_source_id(collector_id, source_definition)
