@@ -39,10 +39,13 @@ private
   end
 
   def remote_source_definition(collector_id, source_definition)
-    sources = client.sources(collector_id)
-    source_id = sources.detect{|source| source == source_definition}.id
+    source_id = lookup_source_id(collector_id, source_definition)
 
     client.source(collector_id, source_id)
+  end
+
+  def lookup_source_id(collector_id, source_definition)
+    client.sources(collector_id).detect{|source| source == source_definition}.id
   end
 
 
