@@ -27,19 +27,27 @@ class SumoControl
     end
 
     def create_source(collector_id, source_definition)
-      connection.post do |req|
+      response = connection.post do |req|
         req.url "/api/v1/collectors/#{collector_id}/sources"
         req.headers['Content-Type'] = 'application/json'
         req.body = source_definition.to_json
       end
+
+      handle_response(response) do |payload|
+        SourceDefinition.from_payload(payload, response.headers['etag'])
+      end
     end
 
     def update_source(collector_id, source_definition)
-      connection.put do |req|
+      response = connection.put do |req|
         req.url "/api/v1/collectors/#{collector_id}/sources/#{source_definition.id}"
         req.body = source_definition.to_json
         req.headers['Content-Type'] = 'application/json'
         req.headers['If-Match'] = source_definition.version
+      end
+
+      handle_response(response) do |payload|
+        SourceDefinition.from_payload(payload, response.headers['etag'])
       end
     end
 

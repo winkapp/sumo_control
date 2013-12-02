@@ -32,7 +32,6 @@ class SumoControl
 
     def self.from_payload(payload, version)
       source_payload = payload.fetch('source', {})
-      puts '*' * 50, source_payload.inspect, '*' * 50
       assignment_method = lambda{|key| key.split(/(?=[A-Z])/).map(&:downcase).join('_') + '='}
 
       source_definition = source_payload.inject(new) do |definition, (key, value)|

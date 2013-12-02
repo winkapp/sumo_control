@@ -14,20 +14,24 @@ class SumoControl
   end
 
   def register(collector_id, id_file_path)
-    source_definition = SourceDefinition.new
-    yield source_definition
+    yield (source_definition = SourceDefinition.new)
 
-    add_or_update_response = add_server_source(collector_id, source_definition)
-    if add_or_update_response.status == 400 && JSON.parse(add_or_update_response.body)['code'] == 'collectors.validation.name.duplicate'
-      add_or_update_response = update_server_source(collector_id, source_definition)
-    end
-    store_source_id(add_or_update_response, id_file_path) if add_or_update_response.status < 400
-    return add_or_update_response
+    register_source(collector_id, source_definition, id_file_path)
   end
 
 private
 
   attr_reader :client
+
+  def register_source(collector_id, source_definition, id_file_path)
+    definition = add_server_source(collector_id, source_definition)
+  rescue SumoControl::Error => error
+    #raise unless error.duplicate?
+
+    definition = update_server_source(collector_id, source_definition)
+  ensure
+    store_source_id(definition, id_file_path)
+  end
 
   def add_server_source(collector_id, source_definition)
     print "json_msg="
@@ -55,22 +59,9 @@ private
   end
 
 
-  def store_source_id(response_object, id_file_path)
-    json_response=response_object.body
-    puts "Sumo Logic JSON response: #{json_response}"
-
-    source_json=JSON.parse(json_response)
-    source_id=source_json['source']['id']
-
-    puts "Sumologic Source Id: #{source_id}"
-    if !source_id
-      raise SumoControl::Error, "Invalid Sumologic Source ID returned. Exiting!"
-    else
-      puts "Writing source id #{source_id} to #{id_file_path}"
-      File.open(id_file_path, "a") do |f|
-        f.puts(source_id)
-      end
+  def store_source_id(source_definition, id_file_path)
+    File.open(id_file_path, "a") do |f|
+      f.puts(source_definition.id)
     end
-
   end
 end
