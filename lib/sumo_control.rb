@@ -23,23 +23,13 @@ private
   attr_reader :client
 
   def register_source(collector_id, source_definition, id_file_path)
-    definition = add_server_source(collector_id, source_definition)
+    definition = client.create_source(collector_id, source_definition)
   rescue SumoControl::Error => error
     raise unless error.duplicate?
 
     definition = update_server_source(collector_id, source_definition)
   ensure
     store_source_id(definition, id_file_path)
-  end
-
-  def add_server_source(collector_id, source_definition)
-    print "json_msg="
-    puts source_definition
-    puts
-    puts "ip=#{source_definition.remote_host}"
-    puts "server name=#{source_definition.name}"
-
-    client.create_source(collector_id, source_definition)
   end
 
   def update_server_source(collector_id, source_definition)
