@@ -2,37 +2,49 @@ require 'json'
 
 class SumoControl
   class SourceDefinition
-    DEFAULTS = {
-      :alive => true,
-      :auth_method => 'key',
-      :automatic_date_parsing => true,
-      :category => '',
-      :default_date_format => '',
-      :description => '',
-      :filters => [],
-      :force_time_zone => false,
-      :host_name => '',
-      :key_password => '',
-      :key_path => '/home/sumo/.ssh/id_rsa',
-      :manual_prefix_regexp => '',
-      :multiline_processing_enabled => false,
-      :name => '',
-      :remote_host => '',
-      :remote_password => '',
-      :remote_path => '',
-      :remote_port => 22,
-      :remote_user => 'root',
-      :source_type => 'RemoteFile',
-      :status => '',
-      :time_zone => '',
-      :user_autoline_matching => false
-    }
-    FIELDS = DEFAULTS.keys
+    FIELDS = [
+      :alive,
+      :auth_method,
+      :automatic_date_parsing,
+      :category,
+      :default_date_format,
+      :description,
+      :filters,
+      :force_time_zone,
+      :host_name,
+      :key_password,
+      :key_path,
+      :manual_prefix_regexp,
+      :multiline_processing_enabled,
+      :name,
+      :remote_host,
+      :remote_password,
+      :remote_path,
+      :remote_port,
+      :remote_user,
+      :source_type,
+      :status,
+      :time_zone,
+      :use_autoline_matching
+    ]
 
     attr_accessor :id, :version, *FIELDS
 
+    def self.from_payload(payload)
+      source_payload = payload.fetch('source'){return nil}
+
+      new(Hash[
+        source_payload.map do |key, value|
+          [
+            key.split(/(?=[A-Z])/).map(&:downcase).join('_'),
+            value
+          ]
+        end
+      ])
+    end
+
     def initialize(attributes = {})
-      DEFAULTS.merge(attributes).each do |key, value|
+      attributes.each do |key, value|
         writer = :"#{key}="
         send(writer, value) if respond_to?(writer)
       end
