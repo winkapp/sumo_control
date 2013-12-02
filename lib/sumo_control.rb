@@ -1,11 +1,11 @@
 require 'rubygems'
 require 'json'
 
-require File.expand_path('../sumo_control/source_definition', __FILE__)
-require File.expand_path('../sumo_control/source_entry', __FILE__)
-require File.expand_path('../sumo_control/error', __FILE__)
-require File.expand_path('../sumo_control/client', __FILE__)
-require File.expand_path('../sumo_control/filters', __FILE__)
+require 'sumo_control/source_definition'
+require 'sumo_control/source_entry'
+require 'sumo_control/error'
+require 'sumo_control/client'
+require 'sumo_control/filters'
 
 class SumoControl
   def initialize(user, password)
