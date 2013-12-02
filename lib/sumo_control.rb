@@ -30,18 +30,19 @@ private
   rescue SumoControl::Error => error
     raise unless error.duplicate?
 
-    update_server_source(collector_id, source_definition)
-  end
+    remote_source_definition = remote_source_definition(collector_id, source_definition)
 
-  def update_server_source(collector_id, source_definition)
-    sources = client.sources(collector_id)
-    source_id = sources.detect{|source| source == source_definition}.id
-
-    remote_source_definition = client.source(collector_id, source_id)
     source_definition.id = remote_source_definition.id
     source_definition.version = remote_source_definition.version
 
     client.update_source(collector_id, source_definition)
+  end
+
+  def remote_source_definition(collector_id, source_definition)
+    sources = client.sources(collector_id)
+    source_id = sources.detect{|source| source == source_definition}.id
+
+    client.source(collector_id, source_id)
   end
 
 
