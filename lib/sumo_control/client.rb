@@ -54,9 +54,11 @@ class SumoControl
   private
 
     def handle_response(response)
-      raise Error if response.status >= 400
+      payload = JSON.parse(response.body)
 
-      yield JSON.parse(response.body)
+      raise SumoControl::Error.new(payload) if response.status >= 400
+
+      yield payload
     end
   end
 end

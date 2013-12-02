@@ -25,7 +25,7 @@ private
   def register_source(collector_id, source_definition, id_file_path)
     definition = add_server_source(collector_id, source_definition)
   rescue SumoControl::Error => error
-    #raise unless error.duplicate?
+    raise unless error.duplicate?
 
     definition = update_server_source(collector_id, source_definition)
   ensure
