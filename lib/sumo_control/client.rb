@@ -19,7 +19,11 @@ class SumoControl
     end
 
     def source(collector_id, source_id)
-      connection.get "/api/v1/collectors/#{collector_id}/sources/#{source_id}"
+      response = connection.get "/api/v1/collectors/#{collector_id}/sources/#{source_id}"
+
+      handle_response(response) do |payload|
+        SourceDefinition.from_payload(payload, response.headers['etag'])
+      end
     end
 
     def create_source(collector_id, source_definition)
@@ -37,6 +41,14 @@ class SumoControl
         req.headers['Content-Type'] = 'application/json'
         req.headers['If-Match'] = source_definition.version
       end
+    end
+
+  private
+
+    def handle_response(response)
+      raise Error if response.status >= 400
+
+      yield JSON.parse(response.body)
     end
   end
 end

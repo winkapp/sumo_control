@@ -30,17 +30,19 @@ class SumoControl
 
     attr_accessor :id, :version, *FIELDS
 
-    def self.from_payload(payload)
-      source_payload = payload.fetch('source'){return nil}
+    def self.from_payload(payload, version)
+      source_payload = payload.fetch('source', {})
+      puts '*' * 50, source_payload.inspect, '*' * 50
+      assignment_method = lambda{|key| key.split(/(?=[A-Z])/).map(&:downcase).join('_') + '='}
 
-      new(Hash[
-        source_payload.map do |key, value|
-          [
-            key.split(/(?=[A-Z])/).map(&:downcase).join('_'),
-            value
-          ]
-        end
-      ])
+      source_definition = source_payload.inject(new) do |definition, (key, value)|
+        definition.send(assignment_method[key], value)
+        definition
+      end
+
+      source_definition.version = version
+
+      source_definition
     end
 
     def initialize(attributes = {})

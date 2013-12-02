@@ -47,9 +47,9 @@ private
       SourceEntry.new(source)
     end.detect{|source| source == source_definition}
 
-    source_response = client.source(collector_id, matched.id)
-    source_definition.id = matched.id
-    source_definition.version = source_response.headers['etag']
+    remove_source_definition = client.source(collector_id, matched.id)
+    source_definition.id = remove_source_definition.id
+    source_definition.version = remove_source_definition.version
 
     client.update_source(collector_id, source_definition)
   end
