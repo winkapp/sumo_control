@@ -2,6 +2,12 @@ class SumoControl
   class SourceEntry
     attr_accessor :id, :name
 
+    def self.from_payload(payload)
+      payload['sources'].map do |source|
+        SourceEntry.new(source)
+      end
+    end
+
     def initialize(attributes)
       attributes.each do |key, value|
         writer = :"#{key}="

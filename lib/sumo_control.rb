@@ -33,16 +33,12 @@ private
   end
 
   def update_server_source(collector_id, source_definition)
-    search_response = client.sources(collector_id)
+    sources = client.sources(collector_id)
+    source_id = sources.detect{|source| source == source_definition}.id
 
-    sources = JSON.parse(search_response.body)
-    matched = sources['sources'].map do |source|
-      SourceEntry.new(source)
-    end.detect{|source| source == source_definition}
-
-    remove_source_definition = client.source(collector_id, matched.id)
-    source_definition.id = remove_source_definition.id
-    source_definition.version = remove_source_definition.version
+    remote_source_definition = client.source(collector_id, source_id)
+    source_definition.id = remote_source_definition.id
+    source_definition.version = remote_source_definition.version
 
     client.update_source(collector_id, source_definition)
   end

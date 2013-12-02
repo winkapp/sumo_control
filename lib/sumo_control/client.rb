@@ -15,7 +15,11 @@ class SumoControl
     end
 
     def sources(collector_id)
-      connection.get "/api/v1/collectors/#{collector_id}/sources"
+      response = connection.get "/api/v1/collectors/#{collector_id}/sources"
+
+      handle_response(response) do |payload|
+        SourceEntry.from_payload(payload)
+      end
     end
 
     def source(collector_id, source_id)
