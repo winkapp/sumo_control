@@ -51,6 +51,11 @@ class SumoControl
       end
     end
 
+    def identify_as(other_definition)
+      self.id = other_definition.id
+      self.version = other_definition.version
+    end
+
     def to_json
       to_h.to_json
     end

@@ -31,9 +31,7 @@ private
     raise unless error.duplicate?
 
     remote_source_definition = remote_source_definition(collector_id, source_definition)
-
-    source_definition.id = remote_source_definition.id
-    source_definition.version = remote_source_definition.version
+    source_definition.identify_as(remote_source_definition)
 
     client.update_source(collector_id, source_definition)
   end
