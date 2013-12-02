@@ -3,12 +3,11 @@ require 'json'
 
 require File.expand_path('../sumo_control/source_definition', __FILE__)
 require File.expand_path('../sumo_control/source_entry', __FILE__)
+require File.expand_path('../sumo_control/error', __FILE__)
 require File.expand_path('../sumo_control/client', __FILE__)
 require File.expand_path('../sumo_control/filters', __FILE__)
 
 class SumoControl
-  Error = Class.new(StandardError)
-
   def initialize(user, password)
     @client = Client.new(user, password)
   end
