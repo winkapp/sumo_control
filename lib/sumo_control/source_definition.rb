@@ -69,7 +69,9 @@ class SumoControl
 
     def to_h
       definition = Hash[
-        FIELDS.map do |field|
+        FIELDS.reject do |field|
+          send(field).nil?
+        end.map do |field|
           [lower_camelize(field), send(field)]
         end
       ]
