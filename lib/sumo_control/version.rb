@@ -1,3 +1,3 @@
-module SumoControl
-  VERSION = "0.0.9"
+class SumoControl
+  VERSION = "1.0.0"
 end

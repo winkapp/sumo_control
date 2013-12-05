@@ -1,128 +1,51 @@
 require 'rubygems'
 require 'json'
-require 'faraday'
 
-module SumoControl
+require 'sumo_control/source_definition'
+require 'sumo_control/source_entry'
+require 'sumo_control/error'
+require 'sumo_control/client'
+require 'sumo_control/filters'
 
-  def conn_sumo(host='https://api.sumologic.com', user=nil, password=nil)
-    conn = Faraday.new(:url => host) do |r|
-      r.response :logger
-      r.adapter Faraday.default_adapter
-    end
-
-    conn.basic_auth(user, password)
-    return conn
+class SumoControl
+  def initialize(user, password)
+    @client = Client.new(user, password)
   end
 
-  def apache_filters
-    [
-      {
-        :filterType => "Exclude",
-        :name => "exclude health check",
-        :regexp => /.*\"GET \/up HTTP\/1\.0\".*/.inspect[1...-1]
-      },
-      {
-        :filterType => "Exclude",
-        :name => "exclude server-status",
-        :regexp => /.*\"GET \/server-status\?auto HTTP\/1\.1\".*/.inspect[1...-1]
-      }
-    ].to_json
+  def register(collector_id, id_file_path)
+    yield (source_definition = SourceDefinition.new)
+
+    updated_source_definition = register_source(collector_id, source_definition)
+    store_source_id(updated_source_definition, id_file_path)
+
+    updated_source_definition
   end
 
-  def sumo_add_or_update(category='apache', source_name=nil, host_ip=nil, log_path=nil, id_file_path=nil, collector_id=nil, sumo_connection=nil)
-    add_or_update_response = add_server_source(category, source_name, host_ip, log_path, collector_id, sumo_connection)
-    if add_or_update_response.status == 400 && JSON.parse(add_or_update_response.body)['code'] == 'collectors.validation.name.duplicate'
-      add_or_update_response = update_server_source(source_name, host_ip, collector_id, sumo_connection)
-    end
-    store_source_id(add_or_update_response, id_file_path) if add_or_update_response.status < 400
-    return add_or_update_response
+private
+
+  attr_reader :client
+
+  def register_source(collector_id, source_definition)
+    client.create_source(collector_id, source_definition)
+  rescue SumoControl::Error => error
+    raise unless error.duplicate?
+
+    source_definition.identify_as(remote_source_definition(collector_id, source_definition))
+    client.update_source(collector_id, source_definition)
   end
 
-protected
-
-  def add_server_source(category='apache', source_name=nil, host_ip=nil, log_path=nil, collector_id=nil, sumo_connection=nil)
-    source_definition = %(
-      {
-        "source":
-        {
-          "alive": true,
-          "authMethod": "key",
-          "automaticDateParsing": true,
-          "category": "#{category}",
-          "defaultDateFormat": "",
-          "description": "",
-          "filters": #{send("#{category}_filters")},
-          "forceTimeZone": false,
-          "hostName": "",
-          "keyPassword": "",
-          "keyPath": "/home/sumo/.ssh/id_rsa",
-          "manualPrefixRegexp": "",
-          "multilineProcessingEnabled": false,
-          "name": "#{source_name}",
-          "remoteHost": "#{host_ip}",
-          "remotePassword": "",
-          "remotePath": "#{log_path}",
-          "remotePort": 22,
-          "remoteUser": "root",
-          "sourceType": "RemoteFile",
-          "status": "",
-          "timeZone": "",
-          "useAutolineMatching": false
-        }
-      }
-    )
-
-    print "json_msg="
-    puts source_definition
-    puts
-    puts "ip=#{host_ip}"
-    puts "server name=#{source_name}"
-
-    response = sumo_connection.post do |req|
-      req.url "/api/v1/collectors/#{collector_id}/sources"
-      req.headers['Content-Type'] = 'application/json'
-      req.body = source_definition
-    end
-
-    return response
+  def remote_source_definition(collector_id, source_definition)
+    client.source(collector_id, lookup_source_id(collector_id, source_definition))
   end
 
-  def update_server_source(source_name=nil, host_ip=nil, collector_id=nil, sumo_connection=nil)
-    sumo_api_path = "/api/v1/collectors/#{collector_id}/sources"
-    search_response = sumo_connection.get sumo_api_path
-    sources = JSON.parse(search_response.body)
-    matched = sources['sources'].map do |source|
-      source['name'] == source_name ? source : nil
-    end.compact.first
-    source_response = sumo_connection.get "#{sumo_api_path}/#{matched['id']}"
-    matched['remoteHost'] = host_ip
-    update_response = sumo_connection.put do |req|
-      req.url "#{sumo_api_path}/#{matched['id']}"
-      req.body = {:source => matched}.to_json
-      req.headers['Content-Type'] = 'application/json'
-      req.headers['If-Match'] = source_response.headers['etag']
-    end
-    return update_response
+  def lookup_source_id(collector_id, source_definition)
+    client.sources(collector_id).detect{|source| source == source_definition}.id
   end
 
 
-  def store_source_id(response_object, id_file_path=nil)
-    json_response=response_object.body
-    puts "Sumo Logic JSON response: #{json_response}"
-
-    source_json=JSON.parse(json_response)
-    source_id=source_json['source']['id']
-
-    puts "Sumologic Source Id: #{source_id}"
-    if !source_id
-      puts "Invalid Sumologic Source ID returned. Exiting!"
-      exit(1)
-    else
-      puts "Writing source id #{source_id} to #{id_file_path}"
-      f = File.new(id_file_path,"a")
-      f.puts(source_id)
-      f.close
+  def store_source_id(source_definition, id_file_path)
+    File.open(id_file_path, "a") do |f|
+      f.puts(source_definition.id)
     end
-
   end
 end
