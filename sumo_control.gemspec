@@ -1,7 +1,7 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'lib/sumo_control/version'
+require './lib/sumo_control/version'
 
 Gem::Specification.new do |spec|
   spec.name          = "sumo_control"
@@ -22,8 +22,8 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "rake"
   spec.add_development_dependency "rspec"
   spec.add_development_dependency "vcr"
-  spec.add_development_dependency "ruby-debug"
+  spec.add_development_dependency "pry-debugger"
 
-  spec.add_runtime_dependency "faraday"
+  spec.add_runtime_dependency "faraday", '~> 0.8.0'
   spec.add_runtime_dependency "json"
 end

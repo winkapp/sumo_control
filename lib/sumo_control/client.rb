@@ -4,65 +4,102 @@ class SumoControl
   class Client
     API_HOST = 'https://api.sumologic.com'
 
-    attr_reader :connection
+    attr_reader :connection, :logger
 
-    def initialize(user, password)
+    def initialize(user, password, logger = Logger.new('/dev/null'))
+      @logger = logger
       @connection = Faraday.new(:url => API_HOST) do |r|
-        r.response :logger
         r.adapter Faraday.default_adapter
       end
       @connection.basic_auth(user, password)
     end
 
     def sources(collector_id)
-      response = connection.get "/api/v1/collectors/#{collector_id}/sources"
+      url = "/api/v1/collectors/#{collector_id}/sources"
+      log_request(url)
+
+      response = connection.get url
 
       handle_response(response) do |payload|
-        SourceEntry.from_payload(payload)
+        payload["sources"].map{|source| SourceDefinition.from_payload(source)}
       end
     end
 
     def source(collector_id, source_id)
-      response = connection.get "/api/v1/collectors/#{collector_id}/sources/#{source_id}"
+      url = "/api/v1/collectors/#{collector_id}/sources/#{source_id}"
+      log_request(url)
+
+      response = connection.get url
 
       handle_response(response) do |payload|
-        SourceDefinition.from_payload(payload, response.headers['etag'])
+        SourceDefinition.from_payload(payload['source'], response.headers['etag'])
       end
     end
 
     def create_source(collector_id, source_definition)
+      url = "/api/v1/collectors/#{collector_id}/sources"
+      log_request(url, source_definition)
+
       response = connection.post do |req|
-        req.url "/api/v1/collectors/#{collector_id}/sources"
+        req.url url
         req.headers['Content-Type'] = 'application/json'
         req.body = source_definition.to_json
       end
 
       handle_response(response) do |payload|
-        SourceDefinition.from_payload(payload, response.headers['etag'])
+        SourceDefinition.from_payload(payload['source'], response.headers['etag'])
       end
     end
 
     def update_source(collector_id, source_definition)
+      url = "/api/v1/collectors/#{collector_id}/sources/#{source_definition.id}"
+      log_request(url, source_definition)
+
       response = connection.put do |req|
-        req.url "/api/v1/collectors/#{collector_id}/sources/#{source_definition.id}"
+        req.url url
         req.body = source_definition.to_json
         req.headers['Content-Type'] = 'application/json'
         req.headers['If-Match'] = source_definition.version
       end
 
       handle_response(response) do |payload|
-        SourceDefinition.from_payload(payload, response.headers['etag'])
+        SourceDefinition.from_payload(payload['source'], response.headers['etag'])
       end
+    end
+
+    def delete_source(collector_id, source_definition)
+      id = source_definition.respond_to?(:id) ? source_definition.id : source_definition
+      url = "/api/v1/collectors/#{collector_id}/sources/#{id}"
+      log_request(url)
+
+      response = connection.delete url
+
+      log_response(response)
     end
 
   private
 
+    def log_request(url, object = nil)
+      if object
+        logger.info("POST #{url}")
+        logger.info("Body: #{JSON.pretty_generate(object.to_h)}")
+      else
+        logger.info("GET #{url}")
+      end
+    end
+
+    def log_response(response)
+      logger.info("Request Status: #{response.status}")
+      logger.info("Body: #{response.body}")
+    end
+
     def handle_response(response)
+      log_response(response)
       payload = JSON.parse(response.body)
 
       raise SumoControl::Error.new(payload) if response.status >= 400
 
-      yield payload
+      yield payload if block_given?
     end
   end
 end

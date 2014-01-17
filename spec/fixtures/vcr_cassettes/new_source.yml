@@ -1,44 +1,59 @@
 ---
-recorded_with: VCR 2.6.0
 http_interactions:
 - request:
     method: post
     uri: https://api.sumologic.com/api/v1/collectors/4216085/sources
     body:
-      string: "\n      {\n        \"source\":\n        {\n          \"alive\": true,\n          \"authMethod\": \"key\",\n          \"automaticDateParsing\": true,\n          \"category\": \"apache\",\n          \"defaultDateFormat\": \"\",\n          \"description\": \"\",\n          \"filters\": [\n      {\n        \"filterType\": \"Exclude\",\n        \"name\": \"exclude health check\",\n        \"regexp\": \".*\\\\\\\"GET /up HTTP/1\\\\.0\\\\\\\".*\"\n      },\n      {\n        \"filterType\": \"Exclude\",\n        \"name\": \"exclude server-status\",\n        \"regexp\": \".*\\\\\\\"GET /server-status\\\\?auto HTTP/1\\\\.1\\\\\\\".*\"\n      }\n    ],\n          \"forceTimeZone\": false,\n          \"hostName\": \"\",\n          \"keyPassword\": \"\",\n          \"keyPath\": \"/home/sumo/.ssh/id_rsa\",\n          \"manualPrefixRegexp\": \"\",\n          \"multilineProcessingEnabled\": false,\n          \"name\": \"test_new_apache\",\n          \"remoteHost\": \"192.168.11.23\",\n          \"remotePassword\": \"\",\n          \"remotePath\": \"/var/log/apache2/access_log\",\n          \"remotePort\": 22,\n          \"remoteUser\": \"root\",\n          \"sourceType\": \"RemoteFile\",\n          \"status\": \"\",\n          \"timeZone\": \"\",\n          \"useAutolineMatching\": false\n        }\n      }\n    "
+      encoding: UTF-8
+      string: ! '{"source":{"alive":null,"authMethod":"key","automaticDateParsing":null,"category":"apache","cutoffTimestamp":null,"defaultDateFormat":null,"description":null,"encoding":null,"filters":[{"filterType":"Exclude","name":"exclude
+        health check","regexp":".*\\\"GET \\/up HTTP\\/1\\.0\\\".*"},{"filterType":"Exclude","name":"exclude
+        server-status","regexp":".*\\\"GET \\/server-status\\?auto HTTP\\/1\\.1\\\".*"}],"forceTimeZone":null,"hostName":null,"id":null,"keyPassword":null,"keyPath":"/home/sumo/.ssh/id_rsa","manualPrefixRegexp":null,"multilineProcessingEnabled":null,"name":"test_new_source_apache","remoteHosts":["192.168.11.23"],"remotePassword":null,"remotePath":"/var/log/apache2/access_log","remotePort":22,"remoteUser":"root","sourceType":"RemoteFile","status":null,"timeZone":null,"useAutolineMatching":null}}'
     headers:
       User-Agent:
-      - Faraday v0.8.8
+      - Faraday v0.8.9
       Authorization:
-      - Basic dGVzdEBleGFtcGxlLmNvbTpwYXNzd29yZA==
+      - Basic bmV0b3BzQGdhemVsbGUuY29tOk4zdDBwNTV1bTA=
       Content-Type:
       - application/json
   response:
     status:
       code: 201
-      message:
+      message: 
     headers:
-      content-type:
-      - application/json
-      expires:
-      - Thu, 01-Jan-1970 00:00:00 GMT
-      set-cookie:
-      - JSESSIONID=1feaatvmsgjgo8vj99ryhy4ia;Path=/api, AWSELB=D5C1176F0665104977B708B0B48E6FFEC09E311CD1473A91FD800B5F0A2443FAC23088ACED0D807762BB3B769CEAADA14ED5C9BC9C86BA1749DC556A5C1B04944D462E0D92;PATH=/
       cache-control:
       - no-cache="set-cookie"
-      content-length:
-      - "750"
+      content-type:
+      - application/json
+      date:
+      - Fri, 17 Jan 2014 22:52:23 GMT
+      etag:
+      - ! '"f013d0a5fbd41f5411e1f654cbbbd6df"'
+      expires:
+      - Thu, 01-Jan-1970 00:00:00 GMT
       location:
-      - /v1/collectors/4216085/sources/6732928
-      connection:
-      - Close
+      - /v1/collectors/4216085/sources/7868940
+      set-cookie:
+      - JSESSIONID=1fd4rdjcamm151msec996rvcqd;Path=/api, AWSELB=D5C1176F0665104977B708B0B48E6FFEC09E311CD187FB89816B52B1211CB2A427CDAEE07C84C78ACDE8F27A082951A6B1D53BEF265A47B963505780F0539FE2C401551BD7;PATH=/
       strict-transport-security:
       - max-age=604800
-      etag:
-      - "\"db981a9bde6922e0f0e564c004f15b57\""
-      date:
-      - Sat, 26 Oct 2013 22:32:51 GMT
+      content-length:
+      - '864'
+      connection:
+      - Close
     body:
-      string: "{\"source\":{\"id\":6732928,\"name\":\"test_new_apache\",\"sourceType\":\"RemoteFile\",\"alive\":true,\"status\":\"\",\"automaticDateParsing\":true,\"multilineProcessingEnabled\":false,\"useAutolineMatching\":false,\"manualPrefixRegexp\":\"\",\"forceTimeZone\":false,\"defaultDateFormat\":\"\",\"hostName\":\"\",\"timeZone\":\"\",\"description\":\"\",\"filters\":[{\"filterType\":\"Exclude\",\"regexp\":\".*\\\\\\\"GET /up HTTP/1\\\\.0\\\\\\\".*\",\"name\":\"exclude health check\"},{\"filterType\":\"Exclude\",\"regexp\":\".*\\\\\\\"GET /server-status\\\\?auto HTTP/1\\\\.1\\\\\\\".*\",\"name\":\"exclude server-status\"}],\"category\":\"apache\",\"keyPath\":\"/home/sumo/.ssh/id_rsa\",\"authMethod\":\"key\",\"remotePort\":22,\"remotePassword\":\"\",\"keyPassword\":\"\",\"remotePath\":\"/var/log/apache2/access_log\",\"remoteHost\":\"192.168.11.23\",\"remoteUser\":\"root\"}}"
-    http_version:
-  recorded_at: Sat, 26 Oct 2013 22:32:55 GMT
+      encoding: US-ASCII
+      string: ! "{\n  \"source\":{\n    \"id\":7868940,\n    \"name\":\"test_new_source_apache\",\n
+        \   \"category\":\"apache\",\n    \"automaticDateParsing\":true,\n    \"multilineProcessingEnabled\":true,\n
+        \   \"useAutolineMatching\":true,\n    \"forceTimeZone\":false,\n    \"filters\":[{\n
+        \     \"filterType\":\"Exclude\",\n      \"name\":\"exclude health check\",\n
+        \     \"regexp\":\".*\\\\\\\"GET \\\\/up HTTP\\\\/1\\\\.0\\\\\\\".*\"\n    },{\n
+        \     \"filterType\":\"Exclude\",\n      \"name\":\"exclude server-status\",\n
+        \     \"regexp\":\".*\\\\\\\"GET \\\\/server-status\\\\?auto HTTP\\\\/1\\\\.1\\\\\\\".*\"\n
+        \   }],\n    \"cutoffTimestamp\":0,\n    \"encoding\":\"UTF-8\",\n    \"authMethod\":\"key\",\n
+        \   \"keyPassword\":null,\n    \"remotePath\":\"/var/log/apache2/access_log\",\n
+        \   \"remotePassword\":null,\n    \"keyPath\":\"/home/sumo/.ssh/id_rsa\",\n
+        \   \"remoteHosts\":[\"192.168.11.23\"],\n    \"remoteUser\":\"root\",\n    \"remotePort\":22,\n
+        \   \"sourceType\":\"RemoteFile\",\n    \"alive\":true\n  }\n}"
+    http_version: 
+  recorded_at: Fri, 17 Jan 2014 22:52:25 GMT
+recorded_with: VCR 2.8.0
