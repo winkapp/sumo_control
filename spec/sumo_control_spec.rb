@@ -62,10 +62,6 @@ describe SumoControl, :vcr do
       File.read(id_file_path).should =~ /"id": #{expected_source_id},/
     end
 
-    after(:each) do
-      File.open(id_file_path, 'w') do |f|
-        f.write("#{expected_source_id}\n") #reset file
-      end
-    end
+    after(:each){File.delete(id_file_path)}
   end
 end
