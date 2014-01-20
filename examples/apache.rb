@@ -16,7 +16,7 @@ sumo.register(collector_id, source_id_log) do |source|
   source.auth_method = 'key'
   source.remote_user = 'root'
   source.remote_password = nil
-  source.remote_host = ['123.2.2.2'] # This machines IP
+  source.remote_hosts = ['123.2.2.2'] # This machines IP
   source.remote_port = 22
   source.key_path = '/home/sumo/.ssh/id_rsa'
   source.key_password = nil
