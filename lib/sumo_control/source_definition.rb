@@ -67,7 +67,7 @@ class SumoControl
     end
 
     def to_s
-      JSON.pretty_generate(to_h.merge(version: version))
+      JSON.pretty_generate(to_h.merge(:version => version))
     end
 
     def to_h
