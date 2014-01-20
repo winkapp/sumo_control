@@ -6,6 +6,7 @@ require 'sumo_control/source_definition'
 require 'sumo_control/error'
 require 'sumo_control/client'
 require 'sumo_control/filters'
+require 'sumo_control/source_file'
 
 class SumoControl
   def initialize(user, password, logger = Logger.new('/dev/null'))
@@ -13,11 +14,11 @@ class SumoControl
     @logger = logger
   end
 
-  def register(collector_id, id_file_path)
+  def register(collector_id, source_json_path)
     yield (source_definition = SourceDefinition.new)
 
     updated_source_definition = register_source(collector_id, source_definition)
-    store_source(updated_source_definition, id_file_path)
+    store_source(updated_source_definition, source_json_path)
 
     updated_source_definition
   rescue SumoControl::Error => error
@@ -45,9 +46,7 @@ private
     client.sources(collector_id).detect{|remote_source| remote_source == source_definition}.id
   end
 
-  def store_source(source_definition, id_file_path)
-    File.open(id_file_path, "w") do |f|
-      f.puts(source_definition.to_s)
-    end
+  def store_source(source_definition, file_path)
+    SourceFile.new(file_path).write(source_definition)
   end
 end
