@@ -434,47 +434,4 @@ http_interactions:
         }
     http_version:
   recorded_at: Fri, 17 Jan 2014 22:54:49 GMT
-- request:
-    method: post
-    uri: https://api.us2.sumologic.com/api/v1/collectors/4216085/sources
-    body:
-      encoding: UTF-8
-      string: '{"source":{"alive":null,"authMethod":"key","automaticDateParsing":null,"blacklist":null,"category":"apache","contentType":null,"cutoffTimestamp":null,"defaultDateFormat":null,"description":null,"encoding":null,"filters":[{"filterType":"Exclude","name":"exclude
-        health check","regexp":".*\"GET \\/up HTTP\\/1\\.0\".*"},{"filterType":"Exclude","name":"exclude
-        server-status","regexp":".*\"GET \\/server-status\\?auto HTTP\\/1\\.1\".*"}],"forceTimeZone":null,"hostName":null,"id":null,"keyPassword":null,"keyPath":"/home/sumo/.ssh/id_rsa","manualPrefixRegexp":null,"messagePerRequest":null,"multilineProcessingEnabled":null,"name":"test_existing_source_apache","pathExpression":null,"paused":null,"remoteHosts":["192.168.11.23"],"remotePassword":null,"remotePath":"/var/log/apache2/access_log","remotePort":22,"remoteUser":"root","scanInterval":null,"sourceType":"RemoteFile","status":null,"timeZone":null,"thirdPartyRef":null,"url":null,"useAutolineMatching":null,"version":null}}'
-    headers:
-      User-Agent:
-      - Faraday v0.8.11
-      Authorization:
-      - Basic ezpzdW1vX2FjY2Vzc19pZD0+InRlc3R1c2VyIiwgOnN1bW9fYWNjZXNzX2tleT0+InRlc3RwYXNzd29yZCJ9Og==
-      Content-Type:
-      - application/json
-  response:
-    status:
-      code: 401
-      message:
-    headers:
-      cache-control:
-      - no-cache="set-cookie"
-      content-type:
-      - application/json; charset=ISO-8859-1
-      date:
-      - Mon, 15 May 2017 16:47:22 GMT
-      set-cookie:
-      - AWSELB=D9214D6508307E89860421CAE8AF3C4B5AD7978804594DEBB7C85B4009A679B143DDDAE2F77A1C9F31D43AF685DC64DEDCF3EBDCBE7A7042AD848263EC31AE46EE949EA6D3;PATH=/
-      content-length:
-      - '128'
-      connection:
-      - Close
-    body:
-      encoding: UTF-8
-      string: |-
-        {
-          "status" : 401,
-          "id" : "4YV7V-2MHHP-AIJUS",
-          "code" : "unauthorized",
-          "message" : "Credential could not be verified."
-        }
-    http_version:
-  recorded_at: Mon, 15 May 2017 16:47:23 GMT
 recorded_with: VCR 3.0.3
