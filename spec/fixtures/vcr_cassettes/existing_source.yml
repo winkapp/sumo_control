@@ -2,17 +2,17 @@
 http_interactions:
 - request:
     method: post
-    uri: https://api.sumologic.com/api/v1/collectors/4216085/sources
+    uri: https://api.us2.sumologic.com/api/v1/collectors/4216085/sources
     body:
       encoding: UTF-8
-      string: ! '{"source":{"alive":null,"authMethod":"key","automaticDateParsing":null,"category":"apache","cutoffTimestamp":null,"defaultDateFormat":null,"description":null,"encoding":null,"filters":[{"filterType":"Exclude","name":"exclude
+      string: '{"source":{"alive":null,"authMethod":"key","automaticDateParsing":null,"category":"apache","cutoffTimestamp":null,"defaultDateFormat":null,"description":null,"encoding":null,"filters":[{"filterType":"Exclude","name":"exclude
         health check","regexp":".*\\\"GET \\/up HTTP\\/1\\.0\\\".*"},{"filterType":"Exclude","name":"exclude
         server-status","regexp":".*\\\"GET \\/server-status\\?auto HTTP\\/1\\.1\\\".*"}],"forceTimeZone":null,"hostName":null,"id":null,"keyPassword":null,"keyPath":"/home/sumo/.ssh/id_rsa","manualPrefixRegexp":null,"multilineProcessingEnabled":null,"name":"test_existing_source_apache","remoteHosts":["192.168.11.23"],"remotePassword":null,"remotePath":"/var/log/apache2/access_log","remotePort":22,"remoteUser":"root","sourceType":"RemoteFile","status":null,"timeZone":null,"useAutolineMatching":null}}'
     headers:
       User-Agent:
       - Faraday v0.8.9
       Authorization:
-      - Basic dGVzdEBleGFtcGxlLmNvbTpwYXNzd29yZA==
+      - Basic dGVzdHVzZXI6dGVzdHBhc3N3b3Jk
       Content-Type:
       - application/json
   response:
@@ -34,14 +34,18 @@ http_interactions:
       - Close
     body:
       encoding: US-ASCII
-      string: ! "{\n  \"status\" : 400,\n  \"id\" : \"5I0MD-W52Z8-OI5B0\",\n  \"code\"
-        : \"collectors.validation.name.duplicate\",\n  \"message\" : \"A resource
-        with the same name already exists.\"\n}"
+      string: |-
+        {
+          "status" : 400,
+          "id" : "5I0MD-W52Z8-OI5B0",
+          "code" : "collectors.validation.name.duplicate",
+          "message" : "A resource with the same name already exists."
+        }
     http_version:
   recorded_at: Fri, 17 Jan 2014 22:54:45 GMT
 - request:
     method: get
-    uri: https://api.sumologic.com/api/v1/collectors/4216085/sources
+    uri: https://api.us2.sumologic.com/api/v1/collectors/4216085/sources
     body:
       encoding: US-ASCII
       string: ''
@@ -49,180 +53,242 @@ http_interactions:
       User-Agent:
       - Faraday v0.8.9
       Authorization:
-      - Basic dGVzdEBleGFtcGxlLmNvbTpwYXNzd29yZA==
+      - Basic dGVzdHVzZXI6dGVzdHBhc3N3b3Jk
   response:
     status:
       code: 200
       message:
     headers:
       cache-control:
-      - !binary |-
-        bm8tY2FjaGU9InNldC1jb29raWUi
+      - no-cache="set-cookie"
       content-type:
-      - !binary |-
-        YXBwbGljYXRpb24vanNvbg==
+      - application/json
       date:
-      - !binary |-
-        RnJpLCAxNyBKYW4gMjAxNCAyMjo1NDo0NSBHTVQ=
-      !binary "ZXhwaXJlcw==":
-      - !binary |-
-        VGh1LCAwMS1KYW4tMTk3MCAwMDowMDowMCBHTVQ=
+      - Fri, 17 Jan 2014 22:54:45 GMT
+      expires:
+      - Thu, 01-Jan-1970 00:00:00 GMT
       set-cookie:
-      - !binary |-
-        SlNFU1NJT05JRD0xNGk1cW1vOXI1c3hqMTlqazNlcmEyNGY3dDtQYXRoPS9h
-        cGksIEFXU0VMQj1ENUMxMTc2RjA2NjUxMDQ5NzdCNzA4QjBCNDhFNkZGRUMw
-        OUUzMTFDRDEwRUUyNkNDNkY4NkZFQUU3NkU0QkJCM0Q3MjhEMjYxQ0FEQTE2
-        RDYyNTYzMjk4MjYxNDRBNzQyRTcwMzQ2RkRGMkM4NTkyRDFGQUY1QkYyQUJG
-        RjY5QjJGREQ1QTM4RkE7UEFUSD0v
-      !binary "c3RyaWN0LXRyYW5zcG9ydC1zZWN1cml0eQ==":
-      - !binary |-
-        bWF4LWFnZT02MDQ4MDA=
-      !binary "dHJhbnNmZXItZW5jb2Rpbmc=":
-      - !binary |-
-        Y2h1bmtlZA==
+      - JSESSIONID=14i5qmo9r5sxj19jk3era24f7t;Path=/api, AWSELB=D5C1176F0665104977B708B0B48E6FFEC09E311CD10EE26CC6F86FEAE76E4BBB3D728D261CADA16D6256329826144A742E70346FDF2C8592D1FAF5BF2ABFF69B2FDD5A38FA;PATH=/
+      strict-transport-security:
+      - max-age=604800
+      transfer-encoding:
+      - chunked
       connection:
-      - !binary |-
-        Q2xvc2U=
+      - Close
     body:
       encoding: ASCII-8BIT
-      string: !binary |-
-        ewogICJzb3VyY2VzIjpbewogICAgImlkIjo0NjA1OTcxLAogICAgIm5hbWUi
-        OiJwcm9kX2c1XzcxMmRfYXBhY2hlIiwKICAgICJjYXRlZ29yeSI6ImFwYWNo
-        ZSIsCiAgICAiYXV0b21hdGljRGF0ZVBhcnNpbmciOnRydWUsCiAgICAibXVs
-        dGlsaW5lUHJvY2Vzc2luZ0VuYWJsZWQiOmZhbHNlLAogICAgInVzZUF1dG9s
-        aW5lTWF0Y2hpbmciOmZhbHNlLAogICAgImZvcmNlVGltZVpvbmUiOmZhbHNl
-        LAogICAgImZpbHRlcnMiOlt7CiAgICAgICJmaWx0ZXJUeXBlIjoiRXhjbHVk
-        ZSIsCiAgICAgICJuYW1lIjoiZXhjbHVkZSBoZWFsdGggY2hlY2siLAogICAg
-        ICAicmVnZXhwIjoiLipcXFwiR0VUIC91cCBIVFRQLzFcXC4wXFxcIi4qIgog
-        ICAgfSx7CiAgICAgICJmaWx0ZXJUeXBlIjoiRXhjbHVkZSIsCiAgICAgICJu
-        YW1lIjoiZXhjbHVkZSBzZXJ2ZXItc3RhdHVzIiwKICAgICAgInJlZ2V4cCI6
-        Ii4qXFxcIkdFVCAvc2VydmVyLXN0YXR1c1xcP2F1dG8gSFRUUC8xXFwuMVxc
-        XCIuKiIKICAgIH1dLAogICAgImN1dG9mZlRpbWVzdGFtcCI6MCwKICAgICJl
-        bmNvZGluZyI6IlVURi04IiwKICAgICJhdXRoTWV0aG9kIjoia2V5IiwKICAg
-        ICJrZXlQYXNzd29yZCI6bnVsbCwKICAgICJyZW1vdGVQYXRoIjoiL3Zhci9s
-        b2cvYXBhY2hlMi9hY2Nlc3NfbG9nIiwKICAgICJyZW1vdGVQYXNzd29yZCI6
-        bnVsbCwKICAgICJrZXlQYXRoIjoiL2hvbWUvc3Vtby8uc3NoL2lkX3JzYSIs
-        CiAgICAicmVtb3RlSG9zdHMiOlsiMTAuMTg0LjUxLjEyNSJdLAogICAgInJl
-        bW90ZVVzZXIiOiJyb290IiwKICAgICJyZW1vdGVQb3J0IjoyMiwKICAgICJz
-        b3VyY2VUeXBlIjoiUmVtb3RlRmlsZSIsCiAgICAiYWxpdmUiOnRydWUKICB9
-        LHsKICAgICJpZCI6NDIxMTY5OSwKICAgICJuYW1lIjoicHJvZF9zcmFwaV9y
-        d182MDVjX2FwYWNoZSIsCiAgICAiY2F0ZWdvcnkiOiJhcGFjaGUiLAogICAg
-        ImF1dG9tYXRpY0RhdGVQYXJzaW5nIjp0cnVlLAogICAgIm11bHRpbGluZVBy
-        b2Nlc3NpbmdFbmFibGVkIjpmYWxzZSwKICAgICJ1c2VBdXRvbGluZU1hdGNo
-        aW5nIjpmYWxzZSwKICAgICJmb3JjZVRpbWVab25lIjpmYWxzZSwKICAgICJm
-        aWx0ZXJzIjpbewogICAgICAiZmlsdGVyVHlwZSI6IkV4Y2x1ZGUiLAogICAg
-        ICAibmFtZSI6ImV4Y2x1ZGUgaGVhbHRoIGNoZWNrIiwKICAgICAgInJlZ2V4
-        cCI6Ii4qXFxcIkdFVCAvdXAgSFRUUC8xXFwuMFxcXCIuKiIKICAgIH0sewog
-        ICAgICAiZmlsdGVyVHlwZSI6IkV4Y2x1ZGUiLAogICAgICAibmFtZSI6ImV4
-        Y2x1ZGUgc2VydmVyLXN0YXR1cyIsCiAgICAgICJyZWdleHAiOiIuKlxcXCJH
-        RVQgL3NlcnZlci1zdGF0dXNcXD9hdXRvIEhUVFAvMVxcLjFcXFwiLioiCiAg
-        ICB9XSwKICAgICJjdXRvZmZUaW1lc3RhbXAiOjAsCiAgICAiZW5jb2Rpbmci
-        OiJVVEYtOCIsCiAgICAiYXV0aE1ldGhvZCI6ImtleSIsCiAgICAia2V5UGFz
-        c3dvcmQiOm51bGwsCiAgICAicmVtb3RlUGF0aCI6Ii92YXIvbG9nL2FwYWNo
-        ZTIvYWNjZXNzX2xvZyIsCiAgICAicmVtb3RlUGFzc3dvcmQiOm51bGwsCiAg
-        ICAia2V5UGF0aCI6Ii9ob21lL3N1bW8vLnNzaC9pZF9yc2EiLAogICAgInJl
-        bW90ZUhvc3RzIjpbIjEwLjE5My41OC4xNzUiXSwKICAgICJyZW1vdGVVc2Vy
-        Ijoicm9vdCIsCiAgICAicmVtb3RlUG9ydCI6MjIsCiAgICAic291cmNlVHlw
-        ZSI6IlJlbW90ZUZpbGUiLAogICAgImFsaXZlIjp0cnVlCiAgfSx7CiAgICAi
-        aWQiOjQyMTE3MDIsCiAgICAibmFtZSI6InByb2Rfc3JhcGlfcndfNjA2ZF9h
-        cGFjaGUiLAogICAgImNhdGVnb3J5IjoiYXBhY2hlIiwKICAgICJhdXRvbWF0
-        aWNEYXRlUGFyc2luZyI6dHJ1ZSwKICAgICJtdWx0aWxpbmVQcm9jZXNzaW5n
-        RW5hYmxlZCI6ZmFsc2UsCiAgICAidXNlQXV0b2xpbmVNYXRjaGluZyI6ZmFs
-        c2UsCiAgICAiZm9yY2VUaW1lWm9uZSI6ZmFsc2UsCiAgICAiZmlsdGVycyI6
-        W3sKICAgICAgImZpbHRlclR5cGUiOiJFeGNsdWRlIiwKICAgICAgIm5hbWUi
-        OiJleGNsdWRlIGhlYWx0aCBjaGVjayIsCiAgICAgICJyZWdleHAiOiIuKlxc
-        XCJHRVQgL3VwIEhUVFAvMVxcLjBcXFwiLioiCiAgICB9LHsKICAgICAgImZp
-        bHRlclR5cGUiOiJFeGNsdWRlIiwKICAgICAgIm5hbWUiOiJleGNsdWRlIHNl
-        cnZlci1zdGF0dXMiLAogICAgICAicmVnZXhwIjoiLipcXFwiR0VUIC9zZXJ2
-        ZXItc3RhdHVzXFw/YXV0byBIVFRQLzFcXC4xXFxcIi4qIgogICAgfV0sCiAg
-        ICAiY3V0b2ZmVGltZXN0YW1wIjowLAogICAgImVuY29kaW5nIjoiVVRGLTgi
-        LAogICAgImF1dGhNZXRob2QiOiJrZXkiLAogICAgImtleVBhc3N3b3JkIjpu
-        dWxsLAogICAgInJlbW90ZVBhdGgiOiIvdmFyL2xvZy9hcGFjaGUyL2FjY2Vz
-        c19sb2ciLAogICAgInJlbW90ZVBhc3N3b3JkIjpudWxsLAogICAgImtleVBh
-        dGgiOiIvaG9tZS9zdW1vLy5zc2gvaWRfcnNhIiwKICAgICJyZW1vdGVIb3N0
-        cyI6WyIxMC4yNDIuNDIuOTIiXSwKICAgICJyZW1vdGVVc2VyIjoicm9vdCIs
-        CiAgICAicmVtb3RlUG9ydCI6MjIsCiAgICAic291cmNlVHlwZSI6IlJlbW90
-        ZUZpbGUiLAogICAgImFsaXZlIjp0cnVlCiAgfSx7CiAgICAiaWQiOjQyMTE3
-        MDQsCiAgICAibmFtZSI6InByb2Rfc3JhcGlfcndfNjA3Y19hcGFjaGUiLAog
-        ICAgImNhdGVnb3J5IjoiYXBhY2hlIiwKICAgICJhdXRvbWF0aWNEYXRlUGFy
-        c2luZyI6dHJ1ZSwKICAgICJtdWx0aWxpbmVQcm9jZXNzaW5nRW5hYmxlZCI6
-        ZmFsc2UsCiAgICAidXNlQXV0b2xpbmVNYXRjaGluZyI6ZmFsc2UsCiAgICAi
-        Zm9yY2VUaW1lWm9uZSI6ZmFsc2UsCiAgICAiZmlsdGVycyI6W3sKICAgICAg
-        ImZpbHRlclR5cGUiOiJFeGNsdWRlIiwKICAgICAgIm5hbWUiOiJleGNsdWRl
-        IGhlYWx0aCBjaGVjayIsCiAgICAgICJyZWdleHAiOiIuKlxcXCJHRVQgL3Vw
-        IEhUVFAvMVxcLjBcXFwiLioiCiAgICB9LHsKICAgICAgImZpbHRlclR5cGUi
-        OiJFeGNsdWRlIiwKICAgICAgIm5hbWUiOiJleGNsdWRlIHNlcnZlci1zdGF0
-        dXMiLAogICAgICAicmVnZXhwIjoiLipcXFwiR0VUIC9zZXJ2ZXItc3RhdHVz
-        XFw/YXV0byBIVFRQLzFcXC4xXFxcIi4qIgogICAgfV0sCiAgICAiY3V0b2Zm
-        VGltZXN0YW1wIjowLAogICAgImVuY29kaW5nIjoiVVRGLTgiLAogICAgImF1
-        dGhNZXRob2QiOiJrZXkiLAogICAgImtleVBhc3N3b3JkIjpudWxsLAogICAg
-        InJlbW90ZVBhdGgiOiIvdmFyL2xvZy9hcGFjaGUyL2FjY2Vzc19sb2ciLAog
-        ICAgInJlbW90ZVBhc3N3b3JkIjpudWxsLAogICAgImtleVBhdGgiOiIvaG9t
-        ZS9zdW1vLy5zc2gvaWRfcnNhIiwKICAgICJyZW1vdGVIb3N0cyI6WyIxMC4z
-        LjM1LjEzOSJdLAogICAgInJlbW90ZVVzZXIiOiJyb290IiwKICAgICJyZW1v
-        dGVQb3J0IjoyMiwKICAgICJzb3VyY2VUeXBlIjoiUmVtb3RlRmlsZSIsCiAg
-        ICAiYWxpdmUiOnRydWUKICB9LHsKICAgICJpZCI6Nzg1ODc2MSwKICAgICJu
-        YW1lIjoidGVzdF9leGlzdGluZ19zb3VyY2VfYXBhY2hlIiwKICAgICJjYXRl
-        Z29yeSI6ImFwYWNoZSIsCiAgICAiYXV0b21hdGljRGF0ZVBhcnNpbmciOnRy
-        dWUsCiAgICAibXVsdGlsaW5lUHJvY2Vzc2luZ0VuYWJsZWQiOnRydWUsCiAg
-        ICAidXNlQXV0b2xpbmVNYXRjaGluZyI6dHJ1ZSwKICAgICJmb3JjZVRpbWVa
-        b25lIjpmYWxzZSwKICAgICJmaWx0ZXJzIjpbewogICAgICAiZmlsdGVyVHlw
-        ZSI6IkV4Y2x1ZGUiLAogICAgICAibmFtZSI6ImV4Y2x1ZGUgaGVhbHRoIGNo
-        ZWNrIiwKICAgICAgInJlZ2V4cCI6Ii4qXFxcIkdFVCBcXC91cCBIVFRQXFwv
-        MVxcLjBcXFwiLioiCiAgICB9LHsKICAgICAgImZpbHRlclR5cGUiOiJFeGNs
-        dWRlIiwKICAgICAgIm5hbWUiOiJleGNsdWRlIHNlcnZlci1zdGF0dXMiLAog
-        ICAgICAicmVnZXhwIjoiLipcXFwiR0VUIFxcL3NlcnZlci1zdGF0dXNcXD9h
-        dXRvIEhUVFBcXC8xXFwuMVxcXCIuKiIKICAgIH1dLAogICAgImN1dG9mZlRp
-        bWVzdGFtcCI6MCwKICAgICJlbmNvZGluZyI6IlVURi04IiwKICAgICJhdXRo
-        TWV0aG9kIjoia2V5IiwKICAgICJrZXlQYXNzd29yZCI6bnVsbCwKICAgICJy
-        ZW1vdGVQYXRoIjoiL3Zhci9sb2cvYXBhY2hlMi9hY2Nlc3NfbG9nIiwKICAg
-        ICJyZW1vdGVQYXNzd29yZCI6bnVsbCwKICAgICJrZXlQYXRoIjoiL2hvbWUv
-        c3Vtby8uc3NoL2lkX3JzYSIsCiAgICAicmVtb3RlSG9zdHMiOlsiMTkyLjE2
-        OC4xMS4yMyJdLAogICAgInJlbW90ZVVzZXIiOiJyb290IiwKICAgICJyZW1v
-        dGVQb3J0IjoyMiwKICAgICJzb3VyY2VUeXBlIjoiUmVtb3RlRmlsZSIsCiAg
-        ICAiYWxpdmUiOnRydWUKICB9LHsKICAgICJpZCI6Nzg2ODk0MCwKICAgICJu
-        YW1lIjoidGVzdF9uZXdfc291cmNlX2FwYWNoZSIsCiAgICAiY2F0ZWdvcnki
-        OiJhcGFjaGUiLAogICAgImF1dG9tYXRpY0RhdGVQYXJzaW5nIjp0cnVlLAog
-        ICAgIm11bHRpbGluZVByb2Nlc3NpbmdFbmFibGVkIjp0cnVlLAogICAgInVz
-        ZUF1dG9saW5lTWF0Y2hpbmciOnRydWUsCiAgICAiZm9yY2VUaW1lWm9uZSI6
-        ZmFsc2UsCiAgICAiZmlsdGVycyI6W3sKICAgICAgImZpbHRlclR5cGUiOiJF
-        eGNsdWRlIiwKICAgICAgIm5hbWUiOiJleGNsdWRlIGhlYWx0aCBjaGVjayIs
-        CiAgICAgICJyZWdleHAiOiIuKlxcXCJHRVQgXFwvdXAgSFRUUFxcLzFcXC4w
-        XFxcIi4qIgogICAgfSx7CiAgICAgICJmaWx0ZXJUeXBlIjoiRXhjbHVkZSIs
-        CiAgICAgICJuYW1lIjoiZXhjbHVkZSBzZXJ2ZXItc3RhdHVzIiwKICAgICAg
-        InJlZ2V4cCI6Ii4qXFxcIkdFVCBcXC9zZXJ2ZXItc3RhdHVzXFw/YXV0byBI
-        VFRQXFwvMVxcLjFcXFwiLioiCiAgICB9XSwKICAgICJjdXRvZmZUaW1lc3Rh
-        bXAiOjAsCiAgICAiZW5jb2RpbmciOiJVVEYtOCIsCiAgICAiYXV0aE1ldGhv
-        ZCI6ImtleSIsCiAgICAia2V5UGFzc3dvcmQiOm51bGwsCiAgICAicmVtb3Rl
-        UGF0aCI6Ii92YXIvbG9nL2FwYWNoZTIvYWNjZXNzX2xvZyIsCiAgICAicmVt
-        b3RlUGFzc3dvcmQiOm51bGwsCiAgICAia2V5UGF0aCI6Ii9ob21lL3N1bW8v
-        LnNzaC9pZF9yc2EiLAogICAgInJlbW90ZUhvc3RzIjpbIjE5Mi4xNjguMTEu
-        MjMiXSwKICAgICJyZW1vdGVVc2VyIjoicm9vdCIsCiAgICAicmVtb3RlUG9y
-        dCI6MjIsCiAgICAic291cmNlVHlwZSI6IlJlbW90ZUZpbGUiLAogICAgImFs
-        aXZlIjp0cnVlCiAgfSx7CiAgICAiaWQiOjQzMzU2ODQsCiAgICAibmFtZSI6
-        InRzdF9nNV8yX2FwYWNoZSIsCiAgICAiY2F0ZWdvcnkiOiJhcGFjaGUiLAog
-        ICAgImF1dG9tYXRpY0RhdGVQYXJzaW5nIjp0cnVlLAogICAgIm11bHRpbGlu
-        ZVByb2Nlc3NpbmdFbmFibGVkIjpmYWxzZSwKICAgICJ1c2VBdXRvbGluZU1h
-        dGNoaW5nIjpmYWxzZSwKICAgICJmb3JjZVRpbWVab25lIjpmYWxzZSwKICAg
-        ICJmaWx0ZXJzIjpbewogICAgICAiZmlsdGVyVHlwZSI6IkV4Y2x1ZGUiLAog
-        ICAgICAibmFtZSI6ImV4Y2x1ZGUgaGVhbHRoIGNoZWNrIiwKICAgICAgInJl
-        Z2V4cCI6Ii4qXFxcIkdFVCAvdXAgSFRUUC8xXFwuMFxcXCIuKiIKICAgIH0s
-        ewogICAgICAiZmlsdGVyVHlwZSI6IkV4Y2x1ZGUiLAogICAgICAibmFtZSI6
-        ImV4Y2x1ZGUgc2VydmVyLXN0YXR1cyIsCiAgICAgICJyZWdleHAiOiIuKlxc
-        XCJHRVQgL3NlcnZlci1zdGF0dXNcXD9hdXRvIEhUVFAvMVxcLjFcXFwiLioi
-        CiAgICB9XSwKICAgICJjdXRvZmZUaW1lc3RhbXAiOjAsCiAgICAiZW5jb2Rp
-        bmciOiJVVEYtOCIsCiAgICAiYXV0aE1ldGhvZCI6ImtleSIsCiAgICAia2V5
-        UGFzc3dvcmQiOm51bGwsCiAgICAicmVtb3RlUGF0aCI6Ii92YXIvbG9nL2Fw
-        YWNoZTIvYWNjZXNzX2xvZyIsCiAgICAicmVtb3RlUGFzc3dvcmQiOm51bGws
-        CiAgICAia2V5UGF0aCI6Ii9ob21lL3N1bW8vLnNzaC9pZF9yc2EiLAogICAg
-        InJlbW90ZUhvc3RzIjpbIjEwLjE2Ni43OC4zIl0sCiAgICAicmVtb3RlVXNl
-        ciI6InJvb3QiLAogICAgInJlbW90ZVBvcnQiOjIyLAogICAgInNvdXJjZVR5
-        cGUiOiJSZW1vdGVGaWxlIiwKICAgICJhbGl2ZSI6dHJ1ZQogIH1dCn0=
+      string: |-
+        {
+          "sources":[{
+            "id":4605971,
+            "name":"prod_g5_712d_apache",
+            "category":"apache",
+            "automaticDateParsing":true,
+            "multilineProcessingEnabled":false,
+            "useAutolineMatching":false,
+            "forceTimeZone":false,
+            "filters":[{
+              "filterType":"Exclude",
+              "name":"exclude health check",
+              "regexp":".*\\\"GET /up HTTP/1\\.0\\\".*"
+            },{
+              "filterType":"Exclude",
+              "name":"exclude server-status",
+              "regexp":".*\\\"GET /server-status\\?auto HTTP/1\\.1\\\".*"
+            }],
+            "cutoffTimestamp":0,
+            "encoding":"UTF-8",
+            "authMethod":"key",
+            "keyPassword":null,
+            "remotePath":"/var/log/apache2/access_log",
+            "remotePassword":null,
+            "keyPath":"/home/sumo/.ssh/id_rsa",
+            "remoteHosts":["10.184.51.125"],
+            "remoteUser":"root",
+            "remotePort":22,
+            "sourceType":"RemoteFile",
+            "alive":true
+          },{
+            "id":4211699,
+            "name":"prod_srapi_rw_605c_apache",
+            "category":"apache",
+            "automaticDateParsing":true,
+            "multilineProcessingEnabled":false,
+            "useAutolineMatching":false,
+            "forceTimeZone":false,
+            "filters":[{
+              "filterType":"Exclude",
+              "name":"exclude health check",
+              "regexp":".*\\\"GET /up HTTP/1\\.0\\\".*"
+            },{
+              "filterType":"Exclude",
+              "name":"exclude server-status",
+              "regexp":".*\\\"GET /server-status\\?auto HTTP/1\\.1\\\".*"
+            }],
+            "cutoffTimestamp":0,
+            "encoding":"UTF-8",
+            "authMethod":"key",
+            "keyPassword":null,
+            "remotePath":"/var/log/apache2/access_log",
+            "remotePassword":null,
+            "keyPath":"/home/sumo/.ssh/id_rsa",
+            "remoteHosts":["10.193.58.175"],
+            "remoteUser":"root",
+            "remotePort":22,
+            "sourceType":"RemoteFile",
+            "alive":true
+          },{
+            "id":4211702,
+            "name":"prod_srapi_rw_606d_apache",
+            "category":"apache",
+            "automaticDateParsing":true,
+            "multilineProcessingEnabled":false,
+            "useAutolineMatching":false,
+            "forceTimeZone":false,
+            "filters":[{
+              "filterType":"Exclude",
+              "name":"exclude health check",
+              "regexp":".*\\\"GET /up HTTP/1\\.0\\\".*"
+            },{
+              "filterType":"Exclude",
+              "name":"exclude server-status",
+              "regexp":".*\\\"GET /server-status\\?auto HTTP/1\\.1\\\".*"
+            }],
+            "cutoffTimestamp":0,
+            "encoding":"UTF-8",
+            "authMethod":"key",
+            "keyPassword":null,
+            "remotePath":"/var/log/apache2/access_log",
+            "remotePassword":null,
+            "keyPath":"/home/sumo/.ssh/id_rsa",
+            "remoteHosts":["10.242.42.92"],
+            "remoteUser":"root",
+            "remotePort":22,
+            "sourceType":"RemoteFile",
+            "alive":true
+          },{
+            "id":4211704,
+            "name":"prod_srapi_rw_607c_apache",
+            "category":"apache",
+            "automaticDateParsing":true,
+            "multilineProcessingEnabled":false,
+            "useAutolineMatching":false,
+            "forceTimeZone":false,
+            "filters":[{
+              "filterType":"Exclude",
+              "name":"exclude health check",
+              "regexp":".*\\\"GET /up HTTP/1\\.0\\\".*"
+            },{
+              "filterType":"Exclude",
+              "name":"exclude server-status",
+              "regexp":".*\\\"GET /server-status\\?auto HTTP/1\\.1\\\".*"
+            }],
+            "cutoffTimestamp":0,
+            "encoding":"UTF-8",
+            "authMethod":"key",
+            "keyPassword":null,
+            "remotePath":"/var/log/apache2/access_log",
+            "remotePassword":null,
+            "keyPath":"/home/sumo/.ssh/id_rsa",
+            "remoteHosts":["10.3.35.139"],
+            "remoteUser":"root",
+            "remotePort":22,
+            "sourceType":"RemoteFile",
+            "alive":true
+          },{
+            "id":7858761,
+            "name":"test_existing_source_apache",
+            "category":"apache",
+            "automaticDateParsing":true,
+            "multilineProcessingEnabled":true,
+            "useAutolineMatching":true,
+            "forceTimeZone":false,
+            "filters":[{
+              "filterType":"Exclude",
+              "name":"exclude health check",
+              "regexp":".*\\\"GET \\/up HTTP\\/1\\.0\\\".*"
+            },{
+              "filterType":"Exclude",
+              "name":"exclude server-status",
+              "regexp":".*\\\"GET \\/server-status\\?auto HTTP\\/1\\.1\\\".*"
+            }],
+            "cutoffTimestamp":0,
+            "encoding":"UTF-8",
+            "authMethod":"key",
+            "keyPassword":null,
+            "remotePath":"/var/log/apache2/access_log",
+            "remotePassword":null,
+            "keyPath":"/home/sumo/.ssh/id_rsa",
+            "remoteHosts":["192.168.11.23"],
+            "remoteUser":"root",
+            "remotePort":22,
+            "sourceType":"RemoteFile",
+            "alive":true
+          },{
+            "id":7868940,
+            "name":"test_new_source_apache",
+            "category":"apache",
+            "automaticDateParsing":true,
+            "multilineProcessingEnabled":true,
+            "useAutolineMatching":true,
+            "forceTimeZone":false,
+            "filters":[{
+              "filterType":"Exclude",
+              "name":"exclude health check",
+              "regexp":".*\\\"GET \\/up HTTP\\/1\\.0\\\".*"
+            },{
+              "filterType":"Exclude",
+              "name":"exclude server-status",
+              "regexp":".*\\\"GET \\/server-status\\?auto HTTP\\/1\\.1\\\".*"
+            }],
+            "cutoffTimestamp":0,
+            "encoding":"UTF-8",
+            "authMethod":"key",
+            "keyPassword":null,
+            "remotePath":"/var/log/apache2/access_log",
+            "remotePassword":null,
+            "keyPath":"/home/sumo/.ssh/id_rsa",
+            "remoteHosts":["192.168.11.23"],
+            "remoteUser":"root",
+            "remotePort":22,
+            "sourceType":"RemoteFile",
+            "alive":true
+          },{
+            "id":4335684,
+            "name":"tst_g5_2_apache",
+            "category":"apache",
+            "automaticDateParsing":true,
+            "multilineProcessingEnabled":false,
+            "useAutolineMatching":false,
+            "forceTimeZone":false,
+            "filters":[{
+              "filterType":"Exclude",
+              "name":"exclude health check",
+              "regexp":".*\\\"GET /up HTTP/1\\.0\\\".*"
+            },{
+              "filterType":"Exclude",
+              "name":"exclude server-status",
+              "regexp":".*\\\"GET /server-status\\?auto HTTP/1\\.1\\\".*"
+            }],
+            "cutoffTimestamp":0,
+            "encoding":"UTF-8",
+            "authMethod":"key",
+            "keyPassword":null,
+            "remotePath":"/var/log/apache2/access_log",
+            "remotePassword":null,
+            "keyPath":"/home/sumo/.ssh/id_rsa",
+            "remoteHosts":["10.166.78.3"],
+            "remoteUser":"root",
+            "remotePort":22,
+            "sourceType":"RemoteFile",
+            "alive":true
+          }]
+        }
     http_version:
   recorded_at: Fri, 17 Jan 2014 22:54:46 GMT
 - request:
     method: get
-    uri: https://api.sumologic.com/api/v1/collectors/4216085/sources/7858761
+    uri: https://api.us2.sumologic.com/api/v1/collectors/4216085/sources/7858761
     body:
       encoding: US-ASCII
       string: ''
@@ -230,86 +296,84 @@ http_interactions:
       User-Agent:
       - Faraday v0.8.9
       Authorization:
-      - Basic dGVzdEBleGFtcGxlLmNvbTpwYXNzd29yZA==
+      - Basic dGVzdHVzZXI6dGVzdHBhc3N3b3Jk
   response:
     status:
       code: 200
       message:
     headers:
       cache-control:
-      - !binary |-
-        bm8tY2FjaGU9InNldC1jb29raWUi
+      - no-cache="set-cookie"
       content-type:
-      - !binary |-
-        YXBwbGljYXRpb24vanNvbg==
+      - application/json
       date:
-      - !binary |-
-        RnJpLCAxNyBKYW4gMjAxNCAyMjo1NDo0NiBHTVQ=
-      !binary "ZXRhZw==":
-      - !binary |-
-        ImNhYTZmYmI0ZGY0ZTc1NjNjMjcxMjk5MTg5NTJjM2YxIg==
-      !binary "ZXhwaXJlcw==":
-      - !binary |-
-        VGh1LCAwMS1KYW4tMTk3MCAwMDowMDowMCBHTVQ=
+      - Fri, 17 Jan 2014 22:54:46 GMT
+      etag:
+      - '"caa6fbb4df4e7563c27129918952c3f1"'
+      expires:
+      - Thu, 01-Jan-1970 00:00:00 GMT
       set-cookie:
-      - !binary |-
-        SlNFU1NJT05JRD0xMW41bXozc3Rmc3dpOTZzaTdkeHNidmR2O1BhdGg9L2Fw
-        aSwgQVdTRUxCPUQ1QzExNzZGMDY2NTEwNDk3N0I3MDhCMEI0OEU2RkZFQzA5
-        RTMxMUNEMTBFRTI2Q0M2Rjg2RkVBRTc2RTRCQkIzRDcyOEQyNjFDQURBMTZE
-        NjI1NjMyOTgyNjE0NEE3NDJFNzAzNDZGREYyQzg1OTJEMUZBRjVCRjJBQkZG
-        NjlCMkZERDVBMzhGQTtQQVRIPS8=
-      !binary "c3RyaWN0LXRyYW5zcG9ydC1zZWN1cml0eQ==":
-      - !binary |-
-        bWF4LWFnZT02MDQ4MDA=
+      - JSESSIONID=11n5mz3stfswi96si7dxsbvdv;Path=/api, AWSELB=D5C1176F0665104977B708B0B48E6FFEC09E311CD10EE26CC6F86FEAE76E4BBB3D728D261CADA16D6256329826144A742E70346FDF2C8592D1FAF5BF2ABFF69B2FDD5A38FA;PATH=/
+      strict-transport-security:
+      - max-age=604800
       content-length:
-      - !binary |-
-        NDM4
+      - '438'
       connection:
-      - !binary |-
-        Q2xvc2U=
+      - Close
     body:
       encoding: ASCII-8BIT
-      string: !binary |-
-        ewogICJzb3VyY2UiOnsKICAgICJpZCI6Nzg1ODc2MSwKICAgICJuYW1lIjoi
-        dGVzdF9leGlzdGluZ19zb3VyY2VfYXBhY2hlIiwKICAgICJjYXRlZ29yeSI6
-        ImFwYWNoZSIsCiAgICAiYXV0b21hdGljRGF0ZVBhcnNpbmciOnRydWUsCiAg
-        ICAibXVsdGlsaW5lUHJvY2Vzc2luZ0VuYWJsZWQiOnRydWUsCiAgICAidXNl
-        QXV0b2xpbmVNYXRjaGluZyI6dHJ1ZSwKICAgICJmb3JjZVRpbWVab25lIjpm
-        YWxzZSwKICAgICJmaWx0ZXJzIjpbewogICAgICAiZmlsdGVyVHlwZSI6IkV4
-        Y2x1ZGUiLAogICAgICAibmFtZSI6ImV4Y2x1ZGUgaGVhbHRoIGNoZWNrIiwK
-        ICAgICAgInJlZ2V4cCI6Ii4qXFxcIkdFVCBcXC91cCBIVFRQXFwvMVxcLjBc
-        XFwiLioiCiAgICB9LHsKICAgICAgImZpbHRlclR5cGUiOiJFeGNsdWRlIiwK
-        ICAgICAgIm5hbWUiOiJleGNsdWRlIHNlcnZlci1zdGF0dXMiLAogICAgICAi
-        cmVnZXhwIjoiLipcXFwiR0VUIFxcL3NlcnZlci1zdGF0dXNcXD9hdXRvIEhU
-        VFBcXC8xXFwuMVxcXCIuKiIKICAgIH1dLAogICAgImN1dG9mZlRpbWVzdGFt
-        cCI6MCwKICAgICJlbmNvZGluZyI6IlVURi04IiwKICAgICJhdXRoTWV0aG9k
-        Ijoia2V5IiwKICAgICJrZXlQYXNzd29yZCI6bnVsbCwKICAgICJyZW1vdGVQ
-        YXRoIjoiL3Zhci9sb2cvYXBhY2hlMi9hY2Nlc3NfbG9nIiwKICAgICJyZW1v
-        dGVQYXNzd29yZCI6bnVsbCwKICAgICJrZXlQYXRoIjoiL2hvbWUvc3Vtby8u
-        c3NoL2lkX3JzYSIsCiAgICAicmVtb3RlSG9zdHMiOlsiMTkyLjE2OC4xMS4y
-        MyJdLAogICAgInJlbW90ZVVzZXIiOiJyb290IiwKICAgICJyZW1vdGVQb3J0
-        IjoyMiwKICAgICJzb3VyY2VUeXBlIjoiUmVtb3RlRmlsZSIsCiAgICAiYWxp
-        dmUiOnRydWUKICB9Cn0=
+      string: |-
+        {
+          "source":{
+            "id":7858761,
+            "name":"test_existing_source_apache",
+            "category":"apache",
+            "automaticDateParsing":true,
+            "multilineProcessingEnabled":true,
+            "useAutolineMatching":true,
+            "forceTimeZone":false,
+            "filters":[{
+              "filterType":"Exclude",
+              "name":"exclude health check",
+              "regexp":".*\\\"GET \\/up HTTP\\/1\\.0\\\".*"
+            },{
+              "filterType":"Exclude",
+              "name":"exclude server-status",
+              "regexp":".*\\\"GET \\/server-status\\?auto HTTP\\/1\\.1\\\".*"
+            }],
+            "cutoffTimestamp":0,
+            "encoding":"UTF-8",
+            "authMethod":"key",
+            "keyPassword":null,
+            "remotePath":"/var/log/apache2/access_log",
+            "remotePassword":null,
+            "keyPath":"/home/sumo/.ssh/id_rsa",
+            "remoteHosts":["192.168.11.23"],
+            "remoteUser":"root",
+            "remotePort":22,
+            "sourceType":"RemoteFile",
+            "alive":true
+          }
+        }
     http_version:
   recorded_at: Fri, 17 Jan 2014 22:54:48 GMT
 - request:
     method: put
-    uri: https://api.sumologic.com/api/v1/collectors/4216085/sources/7858761
+    uri: https://api.us2.sumologic.com/api/v1/collectors/4216085/sources/7858761
     body:
       encoding: UTF-8
-      string: ! '{"source":{"alive":null,"authMethod":"key","automaticDateParsing":null,"category":"apache","cutoffTimestamp":null,"defaultDateFormat":null,"description":null,"encoding":null,"filters":[{"filterType":"Exclude","name":"exclude
+      string: '{"source":{"alive":null,"authMethod":"key","automaticDateParsing":null,"category":"apache","cutoffTimestamp":null,"defaultDateFormat":null,"description":null,"encoding":null,"filters":[{"filterType":"Exclude","name":"exclude
         health check","regexp":".*\\\"GET \\/up HTTP\\/1\\.0\\\".*"},{"filterType":"Exclude","name":"exclude
         server-status","regexp":".*\\\"GET \\/server-status\\?auto HTTP\\/1\\.1\\\".*"}],"forceTimeZone":null,"hostName":null,"id":7858761,"keyPassword":null,"keyPath":"/home/sumo/.ssh/id_rsa","manualPrefixRegexp":null,"multilineProcessingEnabled":null,"name":"test_existing_source_apache","remoteHosts":["192.168.11.23"],"remotePassword":null,"remotePath":"/var/log/apache2/access_log","remotePort":22,"remoteUser":"root","sourceType":"RemoteFile","status":null,"timeZone":null,"useAutolineMatching":null}}'
     headers:
       User-Agent:
       - Faraday v0.8.9
       Authorization:
-      - Basic dGVzdEBleGFtcGxlLmNvbTpwYXNzd29yZA==
+      - Basic dGVzdHVzZXI6dGVzdHBhc3N3b3Jk
       Content-Type:
       - application/json
       If-Match:
-      - !binary |-
-        ImNhYTZmYmI0ZGY0ZTc1NjNjMjcxMjk5MTg5NTJjM2YxIg==
+      - '"caa6fbb4df4e7563c27129918952c3f1"'
   response:
     status:
       code: 200
@@ -321,13 +385,13 @@ http_interactions:
       - application/json
       date:
       - Fri, 17 Jan 2014 22:54:48 GMT
-      !binary "ZXRhZw==":
-      - ! '"0812ec7ee0baa811ba9cf63b0d2b3f7b"'
-      !binary "ZXhwaXJlcw==":
+      etag:
+      - '"0812ec7ee0baa811ba9cf63b0d2b3f7b"'
+      expires:
       - Thu, 01-Jan-1970 00:00:00 GMT
       set-cookie:
       - JSESSIONID=sfqn678zn88xuyccn7cm6im3;Path=/api, AWSELB=D5C1176F0665104977B708B0B48E6FFEC09E311CD10EE26CC6F86FEAE76E4BBB3D728D261CADA16D6256329826144A742E70346FDF2C8592D1FAF5BF2ABFF69B2FDD5A38FA;PATH=/
-      !binary "c3RyaWN0LXRyYW5zcG9ydC1zZWN1cml0eQ==":
+      strict-transport-security:
       - max-age=604800
       content-length:
       - '869'
@@ -335,18 +399,82 @@ http_interactions:
       - Close
     body:
       encoding: US-ASCII
-      string: ! "{\n  \"source\":{\n    \"id\":7858761,\n    \"name\":\"test_existing_source_apache\",\n
-        \   \"category\":\"apache\",\n    \"automaticDateParsing\":true,\n    \"multilineProcessingEnabled\":true,\n
-        \   \"useAutolineMatching\":true,\n    \"forceTimeZone\":false,\n    \"filters\":[{\n
-        \     \"filterType\":\"Exclude\",\n      \"name\":\"exclude health check\",\n
-        \     \"regexp\":\".*\\\\\\\"GET \\\\/up HTTP\\\\/1\\\\.0\\\\\\\".*\"\n    },{\n
-        \     \"filterType\":\"Exclude\",\n      \"name\":\"exclude server-status\",\n
-        \     \"regexp\":\".*\\\\\\\"GET \\\\/server-status\\\\?auto HTTP\\\\/1\\\\.1\\\\\\\".*\"\n
-        \   }],\n    \"cutoffTimestamp\":0,\n    \"encoding\":\"UTF-8\",\n    \"authMethod\":\"key\",\n
-        \   \"keyPassword\":null,\n    \"remotePath\":\"/var/log/apache2/access_log\",\n
-        \   \"remotePassword\":null,\n    \"keyPath\":\"/home/sumo/.ssh/id_rsa\",\n
-        \   \"remoteHosts\":[\"192.168.11.23\"],\n    \"remoteUser\":\"root\",\n    \"remotePort\":22,\n
-        \   \"sourceType\":\"RemoteFile\",\n    \"alive\":true\n  }\n}"
+      string: |-
+        {
+          "source":{
+            "id":7858761,
+            "name":"test_existing_source_apache",
+            "category":"apache",
+            "automaticDateParsing":true,
+            "multilineProcessingEnabled":true,
+            "useAutolineMatching":true,
+            "forceTimeZone":false,
+            "filters":[{
+              "filterType":"Exclude",
+              "name":"exclude health check",
+              "regexp":".*\\\"GET \\/up HTTP\\/1\\.0\\\".*"
+            },{
+              "filterType":"Exclude",
+              "name":"exclude server-status",
+              "regexp":".*\\\"GET \\/server-status\\?auto HTTP\\/1\\.1\\\".*"
+            }],
+            "cutoffTimestamp":0,
+            "encoding":"UTF-8",
+            "authMethod":"key",
+            "keyPassword":null,
+            "remotePath":"/var/log/apache2/access_log",
+            "remotePassword":null,
+            "keyPath":"/home/sumo/.ssh/id_rsa",
+            "remoteHosts":["192.168.11.23"],
+            "remoteUser":"root",
+            "remotePort":22,
+            "sourceType":"RemoteFile",
+            "alive":true
+          }
+        }
     http_version:
   recorded_at: Fri, 17 Jan 2014 22:54:49 GMT
-recorded_with: VCR 2.8.0
+- request:
+    method: post
+    uri: https://api.us2.sumologic.com/api/v1/collectors/4216085/sources
+    body:
+      encoding: UTF-8
+      string: '{"source":{"alive":null,"authMethod":"key","automaticDateParsing":null,"blacklist":null,"category":"apache","contentType":null,"cutoffTimestamp":null,"defaultDateFormat":null,"description":null,"encoding":null,"filters":[{"filterType":"Exclude","name":"exclude
+        health check","regexp":".*\"GET \\/up HTTP\\/1\\.0\".*"},{"filterType":"Exclude","name":"exclude
+        server-status","regexp":".*\"GET \\/server-status\\?auto HTTP\\/1\\.1\".*"}],"forceTimeZone":null,"hostName":null,"id":null,"keyPassword":null,"keyPath":"/home/sumo/.ssh/id_rsa","manualPrefixRegexp":null,"messagePerRequest":null,"multilineProcessingEnabled":null,"name":"test_existing_source_apache","pathExpression":null,"paused":null,"remoteHosts":["192.168.11.23"],"remotePassword":null,"remotePath":"/var/log/apache2/access_log","remotePort":22,"remoteUser":"root","scanInterval":null,"sourceType":"RemoteFile","status":null,"timeZone":null,"thirdPartyRef":null,"url":null,"useAutolineMatching":null,"version":null}}'
+    headers:
+      User-Agent:
+      - Faraday v0.8.11
+      Authorization:
+      - Basic ezpzdW1vX2FjY2Vzc19pZD0+InRlc3R1c2VyIiwgOnN1bW9fYWNjZXNzX2tleT0+InRlc3RwYXNzd29yZCJ9Og==
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 401
+      message:
+    headers:
+      cache-control:
+      - no-cache="set-cookie"
+      content-type:
+      - application/json; charset=ISO-8859-1
+      date:
+      - Mon, 15 May 2017 16:47:22 GMT
+      set-cookie:
+      - AWSELB=D9214D6508307E89860421CAE8AF3C4B5AD7978804594DEBB7C85B4009A679B143DDDAE2F77A1C9F31D43AF685DC64DEDCF3EBDCBE7A7042AD848263EC31AE46EE949EA6D3;PATH=/
+      content-length:
+      - '128'
+      connection:
+      - Close
+    body:
+      encoding: UTF-8
+      string: |-
+        {
+          "status" : 401,
+          "id" : "4YV7V-2MHHP-AIJUS",
+          "code" : "unauthorized",
+          "message" : "Credential could not be verified."
+        }
+    http_version:
+  recorded_at: Mon, 15 May 2017 16:47:23 GMT
+recorded_with: VCR 3.0.3

@@ -1,0 +1,803 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://api.us2.sumologic.com/api/v1/collectors/116771369/sources
+    body:
+      encoding: UTF-8
+      string: '{"api.version":"v1","source":{"alive":null,"authMethod":null,"automaticDateParsing":null,"blacklist":null,"category":"test_category","contentType":null,"cutoffTimestamp":null,"defaultDateFormat":null,"description":"test_description","encoding":null,"filters":null,"forceTimeZone":null,"hostName":null,"id":null,"keyPassword":null,"keyPath":null,"manualPrefixRegexp":null,"messagePerRequest":null,"multilineProcessingEnabled":null,"name":"test_source","pathExpression":null,"paused":false,"remoteHosts":null,"remotePassword":null,"remotePath":null,"remotePort":null,"remoteUser":null,"scanInterval":300000,"sourceType":"Polling","status":null,"timeZone":null,"thirdPartyRef":{"resources":[{"serviceType":"AwsS3Bucket","path":{"type":"S3BucketPathExpression","bucketName":"test-bucket","pathExpression":"*/test.log"},"authentication":{"type":"S3BucketAuthentication","awsId":"TESTAWSID","awsKey":"TESTAWSKEY"}}]},"url":null,"useAutolineMatching":null,"version":null}}'
+    headers:
+      User-Agent:
+      - Faraday v0.12.0.1
+      Authorization:
+      - Basic dGVzdHVzZXI6dGVzdHBhc3N3b3Jk
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 201
+      message:
+    headers:
+      cache-control:
+      - no-cache="set-cookie"
+      content-type:
+      - application/json
+      date:
+      - Fri, 21 Apr 2017 19:43:29 GMT
+      etag:
+      - '"e0f1ecb5663fbf8db4a3b4d11e1abd0a"'
+      expires:
+      - Thu, 01-Jan-1970 00:00:00 GMT
+      location:
+      - "/v1/collectors/116771369/sources/194207840"
+      set-cookie:
+      - JSESSIONID=18kreep9vy6t112skfvuo9fi9n;Path=/api, AWSELB=D9214D6508307E89860421CAE8AF3C4B5AD7978804594DEBB7C85B4009A679B143DDDAE2F7AB83BFCC5D3EB8B0E8B6E26AD9C3474967CB74630341015E23DE549CD285CA32;PATH=/
+      transfer-encoding:
+      - chunked
+      connection:
+      - Close
+    body:
+      encoding: ASCII-8BIT
+      string: |-
+        {
+          "source":{
+            "id":194207840,
+            "name":"test_source",
+            "description":"test_description",
+            "category":"test_category",
+            "automaticDateParsing":true,
+            "multilineProcessingEnabled":true,
+            "useAutolineMatching":true,
+            "contentType":"AwsS3Bucket",
+            "forceTimeZone":false,
+            "filters":[],
+            "cutoffTimestamp":0,
+            "encoding":"UTF-8",
+            "thirdPartyRef":{
+              "resources":[{
+                "serviceType":"AwsS3Bucket",
+                "path":{
+                  "type":"S3BucketPathExpression",
+                  "bucketName":"test-bucket",
+                  "pathExpression":"*/test.log"
+                },
+                "authentication":{
+                  "type":"S3BucketAuthentication",
+                  "awsId":"TESTAWSID",
+                  "awsKey":"********"
+                }
+              }]
+            },
+            "scanInterval":300000,
+            "paused":false,
+            "sourceType":"Polling",
+            "alive":true
+          }
+        }
+    http_version:
+  recorded_at: Fri, 21 Apr 2017 19:43:30 GMT
+- request:
+    method: post
+    uri: https://api.us2.sumologic.com/api/v1/collectors/116771369/sources
+    body:
+      encoding: UTF-8
+      string: '{"api.version":"v1","source":{"alive":null,"authMethod":null,"automaticDateParsing":null,"blacklist":null,"category":"test_category","contentType":null,"cutoffTimestamp":null,"defaultDateFormat":null,"description":"test_description","encoding":null,"filters":null,"forceTimeZone":null,"hostName":null,"id":null,"keyPassword":null,"keyPath":null,"manualPrefixRegexp":null,"messagePerRequest":null,"multilineProcessingEnabled":null,"name":"test_source","pathExpression":null,"paused":false,"remoteHosts":null,"remotePassword":null,"remotePath":null,"remotePort":null,"remoteUser":null,"scanInterval":300000,"sourceType":"Polling","status":null,"timeZone":null,"thirdPartyRef":{"resources":[{"serviceType":"AwsS3Bucket","path":{"type":"S3BucketPathExpression","bucketName":"test-bucket","pathExpression":"*/test.log"},"authentication":{"type":"S3BucketAuthentication","awsId":"TESTAWSID","awsKey":"TESTAWSKEY"}}]},"url":null,"useAutolineMatching":null,"version":null}}'
+    headers:
+      User-Agent:
+      - Faraday v0.12.0.1
+      Authorization:
+      - Basic dGVzdHVzZXI6dGVzdHBhc3N3b3Jk
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 400
+      message:
+    headers:
+      cache-control:
+      - no-cache="set-cookie"
+      content-type:
+      - application/json; charset=ISO-8859-1
+      date:
+      - Fri, 21 Apr 2017 19:43:30 GMT
+      set-cookie:
+      - AWSELB=D9214D6508307E89860421CAE8AF3C4B5AD79788042F073C756E2E87EB70002821A2235750815F2B10226BB6FFCF4D0110880A9BAE5B97FD9751BAB63366D9FDFD251F2DB5;PATH=/
+      content-length:
+      - '164'
+      connection:
+      - Close
+    body:
+      encoding: UTF-8
+      string: |-
+        {
+          "status" : 400,
+          "id" : "ECFJA-NQB1F-QYYM5",
+          "code" : "collectors.validation.name.duplicate",
+          "message" : "A resource with the same name already exists."
+        }
+    http_version:
+  recorded_at: Fri, 21 Apr 2017 19:43:30 GMT
+- request:
+    method: get
+    uri: https://api.us2.sumologic.com/api/v1/collectors/116771369/sources
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.12.0.1
+      Authorization:
+      - Basic dGVzdHVzZXI6dGVzdHBhc3N3b3Jk
+  response:
+    status:
+      code: 200
+      message:
+    headers:
+      cache-control:
+      - no-cache="set-cookie"
+      content-type:
+      - application/json
+      date:
+      - Fri, 21 Apr 2017 19:43:31 GMT
+      expires:
+      - Thu, 01-Jan-1970 00:00:00 GMT
+      set-cookie:
+      - JSESSIONID=1fiz993mn6xj7judwhn123gx1;Path=/api, AWSELB=D9214D6508307E89860421CAE8AF3C4B5AD7978804594DEBB7C85B4009A679B143DDDAE2F77A1C9F31D43AF685DC64DEDCF3EBDCBE7A7042AD848263EC31AE46EE949EA6D3;PATH=/
+      transfer-encoding:
+      - chunked
+      connection:
+      - Close
+    body:
+      encoding: ASCII-8BIT
+      string: |-
+        {
+          "sources":[{
+            "id":194207840,
+            "name":"test_source",
+            "description":"test_description",
+            "category":"test_category",
+            "automaticDateParsing":true,
+            "multilineProcessingEnabled":true,
+            "useAutolineMatching":true,
+            "contentType":"AwsS3Bucket",
+            "forceTimeZone":false,
+            "filters":[],
+            "cutoffTimestamp":0,
+            "encoding":"UTF-8",
+            "thirdPartyRef":{
+              "resources":[{
+                "serviceType":"AwsS3Bucket",
+                "path":{
+                  "type":"S3BucketPathExpression",
+                  "bucketName":"test-bucket",
+                  "pathExpression":"*/test.log"
+                },
+                "authentication":{
+                  "type":"S3BucketAuthentication",
+                  "awsId":"TESTAWSID",
+                  "awsKey":"********"
+                }
+              }]
+            },
+            "scanInterval":300000,
+            "paused":false,
+            "sourceType":"Polling",
+            "alive":true
+          }]
+        }
+    http_version:
+  recorded_at: Fri, 21 Apr 2017 19:43:31 GMT
+- request:
+    method: get
+    uri: https://api.us2.sumologic.com/api/v1/collectors/116771369/sources/194207840
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.12.0.1
+      Authorization:
+      - Basic dGVzdHVzZXI6dGVzdHBhc3N3b3Jk
+  response:
+    status:
+      code: 200
+      message:
+    headers:
+      cache-control:
+      - no-cache="set-cookie"
+      content-type:
+      - application/json
+      date:
+      - Fri, 21 Apr 2017 19:43:31 GMT
+      etag:
+      - '"e0f1ecb5663fbf8db4a3b4d11e1abd0a"'
+      expires:
+      - Thu, 01-Jan-1970 00:00:00 GMT
+      set-cookie:
+      - JSESSIONID=1tkt5ie24rfp41x966to1afs58;Path=/api, AWSELB=D9214D6508307E89860421CAE8AF3C4B5AD7978804594DEBB7C85B4009A679B143DDDAE2F7AB83BFCC5D3EB8B0E8B6E26AD9C3474967CB74630341015E23DE549CD285CA32;PATH=/
+      transfer-encoding:
+      - chunked
+      connection:
+      - Close
+    body:
+      encoding: ASCII-8BIT
+      string: |-
+        {
+          "source":{
+            "id":194207840,
+            "name":"test_source",
+            "description":"test_description",
+            "category":"test_category",
+            "automaticDateParsing":true,
+            "multilineProcessingEnabled":true,
+            "useAutolineMatching":true,
+            "contentType":"AwsS3Bucket",
+            "forceTimeZone":false,
+            "filters":[],
+            "cutoffTimestamp":0,
+            "encoding":"UTF-8",
+            "thirdPartyRef":{
+              "resources":[{
+                "serviceType":"AwsS3Bucket",
+                "path":{
+                  "type":"S3BucketPathExpression",
+                  "bucketName":"test-bucket",
+                  "pathExpression":"*/test.log"
+                },
+                "authentication":{
+                  "type":"S3BucketAuthentication",
+                  "awsId":"TESTAWSID",
+                  "awsKey":"********"
+                }
+              }]
+            },
+            "scanInterval":300000,
+            "paused":false,
+            "sourceType":"Polling",
+            "alive":true
+          }
+        }
+    http_version:
+  recorded_at: Fri, 21 Apr 2017 19:43:31 GMT
+- request:
+    method: get
+    uri: https://api.us2.sumologic.com/api/v1/collectors/116771369/sources
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.12.0.1
+      Authorization:
+      - Basic dGVzdHVzZXI6dGVzdHBhc3N3b3Jk
+  response:
+    status:
+      code: 200
+      message:
+    headers:
+      cache-control:
+      - no-cache="set-cookie"
+      content-type:
+      - application/json
+      date:
+      - Fri, 21 Apr 2017 19:43:32 GMT
+      expires:
+      - Thu, 01-Jan-1970 00:00:00 GMT
+      set-cookie:
+      - JSESSIONID=1uy39rt9ijzl41e8yrbra6wvvg;Path=/api, AWSELB=D9214D6508307E89860421CAE8AF3C4B5AD7978804594DEBB7C85B4009A679B143DDDAE2F7AD57A987B21640E3D01E6E14B656DB3258B7DFB1DF8F5C9D8B3A10ED9DEE9258;PATH=/
+      transfer-encoding:
+      - chunked
+      connection:
+      - Close
+    body:
+      encoding: ASCII-8BIT
+      string: |-
+        {
+          "sources":[{
+            "id":194207840,
+            "name":"test_source",
+            "description":"test_description",
+            "category":"test_category",
+            "automaticDateParsing":true,
+            "multilineProcessingEnabled":true,
+            "useAutolineMatching":true,
+            "contentType":"AwsS3Bucket",
+            "forceTimeZone":false,
+            "filters":[],
+            "cutoffTimestamp":0,
+            "encoding":"UTF-8",
+            "thirdPartyRef":{
+              "resources":[{
+                "serviceType":"AwsS3Bucket",
+                "path":{
+                  "type":"S3BucketPathExpression",
+                  "bucketName":"test-bucket",
+                  "pathExpression":"*/test.log"
+                },
+                "authentication":{
+                  "type":"S3BucketAuthentication",
+                  "awsId":"TESTAWSID",
+                  "awsKey":"********"
+                }
+              }]
+            },
+            "scanInterval":300000,
+            "paused":false,
+            "sourceType":"Polling",
+            "alive":true
+          }]
+        }
+    http_version:
+  recorded_at: Fri, 21 Apr 2017 19:43:32 GMT
+- request:
+    method: get
+    uri: https://api.us2.sumologic.com/api/v1/collectors/116771369/sources/194207840
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.12.0.1
+      Authorization:
+      - Basic dGVzdHVzZXI6dGVzdHBhc3N3b3Jk
+  response:
+    status:
+      code: 200
+      message:
+    headers:
+      cache-control:
+      - no-cache="set-cookie"
+      content-type:
+      - application/json
+      date:
+      - Fri, 21 Apr 2017 19:43:32 GMT
+      etag:
+      - '"e0f1ecb5663fbf8db4a3b4d11e1abd0a"'
+      expires:
+      - Thu, 01-Jan-1970 00:00:00 GMT
+      set-cookie:
+      - JSESSIONID=1pd50bxopav27ons3thu0yykq;Path=/api, AWSELB=D9214D6508307E89860421CAE8AF3C4B5AD7978804594DEBB7C85B4009A679B143DDDAE2F7AB83BFCC5D3EB8B0E8B6E26AD9C3474967CB74630341015E23DE549CD285CA32;PATH=/
+      transfer-encoding:
+      - chunked
+      connection:
+      - Close
+    body:
+      encoding: ASCII-8BIT
+      string: |-
+        {
+          "source":{
+            "id":194207840,
+            "name":"test_source",
+            "description":"test_description",
+            "category":"test_category",
+            "automaticDateParsing":true,
+            "multilineProcessingEnabled":true,
+            "useAutolineMatching":true,
+            "contentType":"AwsS3Bucket",
+            "forceTimeZone":false,
+            "filters":[],
+            "cutoffTimestamp":0,
+            "encoding":"UTF-8",
+            "thirdPartyRef":{
+              "resources":[{
+                "serviceType":"AwsS3Bucket",
+                "path":{
+                  "type":"S3BucketPathExpression",
+                  "bucketName":"test-bucket",
+                  "pathExpression":"*/test.log"
+                },
+                "authentication":{
+                  "type":"S3BucketAuthentication",
+                  "awsId":"TESTAWSID",
+                  "awsKey":"********"
+                }
+              }]
+            },
+            "scanInterval":300000,
+            "paused":false,
+            "sourceType":"Polling",
+            "alive":true
+          }
+        }
+    http_version:
+  recorded_at: Fri, 21 Apr 2017 19:43:32 GMT
+- request:
+    method: put
+    uri: https://api.us2.sumologic.com/api/v1/collectors/116771369/sources/194207840
+    body:
+      encoding: UTF-8
+      string: '{"api.version":"v1","source":{"alive":null,"authMethod":null,"automaticDateParsing":null,"blacklist":null,"category":"test_updated_category","contentType":null,"cutoffTimestamp":null,"defaultDateFormat":null,"description":"test_updated_description","encoding":null,"filters":null,"forceTimeZone":null,"hostName":null,"id":194207840,"keyPassword":null,"keyPath":null,"manualPrefixRegexp":null,"messagePerRequest":null,"multilineProcessingEnabled":null,"name":"test_source","pathExpression":null,"paused":true,"remoteHosts":null,"remotePassword":null,"remotePath":null,"remotePort":null,"remoteUser":null,"scanInterval":60000,"sourceType":"Polling","status":null,"timeZone":null,"thirdPartyRef":{"resources":[{"serviceType":"AwsS3Bucket","path":{"type":"S3BucketPathExpression","bucketName":"test-updated-bucket","pathExpression":"*/test-updated.log"},"authentication":{"type":"S3BucketAuthentication","awsId":"TESTAWSID","awsKey":"TESTAWSKEY"}}]},"url":null,"useAutolineMatching":null,"version":"\"e0f1ecb5663fbf8db4a3b4d11e1abd0a\""}}'
+    headers:
+      User-Agent:
+      - Faraday v0.12.0.1
+      Authorization:
+      - Basic dGVzdHVzZXI6dGVzdHBhc3N3b3Jk
+      Content-Type:
+      - application/json
+      If-Match:
+      - '"e0f1ecb5663fbf8db4a3b4d11e1abd0a"'
+  response:
+    status:
+      code: 200
+      message:
+    headers:
+      cache-control:
+      - no-cache="set-cookie"
+      content-type:
+      - application/json
+      date:
+      - Fri, 21 Apr 2017 19:43:32 GMT
+      etag:
+      - '"bae6cc6626b9344a0e18a85430efb4d2"'
+      expires:
+      - Thu, 01-Jan-1970 00:00:00 GMT
+      set-cookie:
+      - JSESSIONID=vbbzax6bsonwiag544ul5d2z;Path=/api, AWSELB=D9214D6508307E89860421CAE8AF3C4B5AD7978804594DEBB7C85B4009A679B143DDDAE2F7AD57A987B21640E3D01E6E14B656DB3258B7DFB1DF8F5C9D8B3A10ED9DEE9258;PATH=/
+      transfer-encoding:
+      - chunked
+      connection:
+      - Close
+    body:
+      encoding: ASCII-8BIT
+      string: |-
+        {
+          "source":{
+            "id":194207840,
+            "name":"test_source",
+            "description":"test_updated_description",
+            "category":"test_updated_category",
+            "automaticDateParsing":true,
+            "multilineProcessingEnabled":true,
+            "useAutolineMatching":true,
+            "contentType":"AwsS3Bucket",
+            "forceTimeZone":false,
+            "filters":[],
+            "cutoffTimestamp":0,
+            "encoding":"UTF-8",
+            "thirdPartyRef":{
+              "resources":[{
+                "serviceType":"AwsS3Bucket",
+                "path":{
+                  "type":"S3BucketPathExpression",
+                  "bucketName":"test-updated-bucket",
+                  "pathExpression":"*/test-updated.log"
+                },
+                "authentication":{
+                  "type":"S3BucketAuthentication",
+                  "awsId":"TESTAWSID",
+                  "awsKey":"********"
+                }
+              }]
+            },
+            "scanInterval":60000,
+            "paused":true,
+            "sourceType":"Polling",
+            "alive":true
+          }
+        }
+    http_version:
+  recorded_at: Fri, 21 Apr 2017 19:43:33 GMT
+- request:
+    method: get
+    uri: https://api.us2.sumologic.com/api/v1/collectors/116771369/sources
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.12.0.1
+      Authorization:
+      - Basic dGVzdHVzZXI6dGVzdHBhc3N3b3Jk
+  response:
+    status:
+      code: 200
+      message:
+    headers:
+      cache-control:
+      - no-cache="set-cookie"
+      content-type:
+      - application/json
+      date:
+      - Fri, 21 Apr 2017 19:43:33 GMT
+      expires:
+      - Thu, 01-Jan-1970 00:00:00 GMT
+      set-cookie:
+      - JSESSIONID=5zk2ftmfr8r21vtz0h3rp0583;Path=/api, AWSELB=D9214D6508307E89860421CAE8AF3C4B5AD7978804594DEBB7C85B4009A679B143DDDAE2F7AB83BFCC5D3EB8B0E8B6E26AD9C3474967CB74630341015E23DE549CD285CA32;PATH=/
+      transfer-encoding:
+      - chunked
+      connection:
+      - Close
+    body:
+      encoding: ASCII-8BIT
+      string: |-
+        {
+          "sources":[{
+            "id":194207840,
+            "name":"test_source",
+            "description":"test_updated_description",
+            "category":"test_updated_category",
+            "automaticDateParsing":true,
+            "multilineProcessingEnabled":true,
+            "useAutolineMatching":true,
+            "contentType":"AwsS3Bucket",
+            "forceTimeZone":false,
+            "filters":[],
+            "cutoffTimestamp":0,
+            "encoding":"UTF-8",
+            "thirdPartyRef":{
+              "resources":[{
+                "serviceType":"AwsS3Bucket",
+                "path":{
+                  "type":"S3BucketPathExpression",
+                  "bucketName":"test-updated-bucket",
+                  "pathExpression":"*/test-updated.log"
+                },
+                "authentication":{
+                  "type":"S3BucketAuthentication",
+                  "awsId":"TESTAWSID",
+                  "awsKey":"********"
+                }
+              }]
+            },
+            "scanInterval":60000,
+            "paused":true,
+            "sourceType":"Polling",
+            "alive":true
+          }]
+        }
+    http_version:
+  recorded_at: Fri, 21 Apr 2017 19:43:33 GMT
+- request:
+    method: get
+    uri: https://api.us2.sumologic.com/api/v1/collectors/116771369/sources/-1
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.12.0.1
+      Authorization:
+      - Basic dGVzdHVzZXI6dGVzdHBhc3N3b3Jk
+  response:
+    status:
+      code: 404
+      message:
+    headers:
+      cache-control:
+      - no-cache="set-cookie"
+      content-type:
+      - application/json; charset=ISO-8859-1
+      date:
+      - Fri, 21 Apr 2017 19:43:34 GMT
+      set-cookie:
+      - AWSELB=D9214D6508307E89860421CAE8AF3C4B5AD7978804594DEBB7C85B4009A679B143DDDAE2F7AD57A987B21640E3D01E6E14B656DB3258B7DFB1DF8F5C9D8B3A10ED9DEE9258;PATH=/
+      content-length:
+      - '143'
+      connection:
+      - Close
+    body:
+      encoding: UTF-8
+      string: |-
+        {
+          "status" : 404,
+          "id" : "ZOJJ6-IZL57-2TKDS",
+          "code" : "collectors.source.invalid",
+          "message" : "The specified source ID is invalid."
+        }
+    http_version:
+  recorded_at: Fri, 21 Apr 2017 19:43:34 GMT
+- request:
+    method: get
+    uri: https://api.us2.sumologic.com/api/v1/collectors/116771369/sources
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.12.0.1
+      Authorization:
+      - Basic dGVzdHVzZXI6dGVzdHBhc3N3b3Jk
+  response:
+    status:
+      code: 200
+      message:
+    headers:
+      cache-control:
+      - no-cache="set-cookie"
+      content-type:
+      - application/json
+      date:
+      - Fri, 21 Apr 2017 19:43:34 GMT
+      expires:
+      - Thu, 01-Jan-1970 00:00:00 GMT
+      set-cookie:
+      - JSESSIONID=578tagc9ygxo1mubejb2ljrg6;Path=/api, AWSELB=D9214D6508307E89860421CAE8AF3C4B5AD7978804594DEBB7C85B4009A679B143DDDAE2F77A1C9F31D43AF685DC64DEDCF3EBDCBE7A7042AD848263EC31AE46EE949EA6D3;PATH=/
+      transfer-encoding:
+      - chunked
+      connection:
+      - Close
+    body:
+      encoding: ASCII-8BIT
+      string: |-
+        {
+          "sources":[{
+            "id":194207840,
+            "name":"test_source",
+            "description":"test_updated_description",
+            "category":"test_updated_category",
+            "automaticDateParsing":true,
+            "multilineProcessingEnabled":true,
+            "useAutolineMatching":true,
+            "contentType":"AwsS3Bucket",
+            "forceTimeZone":false,
+            "filters":[],
+            "cutoffTimestamp":0,
+            "encoding":"UTF-8",
+            "thirdPartyRef":{
+              "resources":[{
+                "serviceType":"AwsS3Bucket",
+                "path":{
+                  "type":"S3BucketPathExpression",
+                  "bucketName":"test-updated-bucket",
+                  "pathExpression":"*/test-updated.log"
+                },
+                "authentication":{
+                  "type":"S3BucketAuthentication",
+                  "awsId":"TESTAWSID",
+                  "awsKey":"********"
+                }
+              }]
+            },
+            "scanInterval":60000,
+            "paused":true,
+            "sourceType":"Polling",
+            "alive":true
+          }]
+        }
+    http_version:
+  recorded_at: Fri, 21 Apr 2017 19:43:34 GMT
+- request:
+    method: get
+    uri: https://api.us2.sumologic.com/api/v1/collectors/116771369/sources/194207840
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.12.0.1
+      Authorization:
+      - Basic dGVzdHVzZXI6dGVzdHBhc3N3b3Jk
+  response:
+    status:
+      code: 200
+      message:
+    headers:
+      cache-control:
+      - no-cache="set-cookie"
+      content-type:
+      - application/json
+      date:
+      - Fri, 21 Apr 2017 19:43:34 GMT
+      etag:
+      - '"bae6cc6626b9344a0e18a85430efb4d2"'
+      expires:
+      - Thu, 01-Jan-1970 00:00:00 GMT
+      set-cookie:
+      - JSESSIONID=vt1kuuas3v591oq8h54d3lpqq;Path=/api, AWSELB=D9214D6508307E89860421CAE8AF3C4B5AD7978804594DEBB7C85B4009A679B143DDDAE2F7AD57A987B21640E3D01E6E14B656DB3258B7DFB1DF8F5C9D8B3A10ED9DEE9258;PATH=/
+      transfer-encoding:
+      - chunked
+      connection:
+      - Close
+    body:
+      encoding: ASCII-8BIT
+      string: |-
+        {
+          "source":{
+            "id":194207840,
+            "name":"test_source",
+            "description":"test_updated_description",
+            "category":"test_updated_category",
+            "automaticDateParsing":true,
+            "multilineProcessingEnabled":true,
+            "useAutolineMatching":true,
+            "contentType":"AwsS3Bucket",
+            "forceTimeZone":false,
+            "filters":[],
+            "cutoffTimestamp":0,
+            "encoding":"UTF-8",
+            "thirdPartyRef":{
+              "resources":[{
+                "serviceType":"AwsS3Bucket",
+                "path":{
+                  "type":"S3BucketPathExpression",
+                  "bucketName":"test-updated-bucket",
+                  "pathExpression":"*/test-updated.log"
+                },
+                "authentication":{
+                  "type":"S3BucketAuthentication",
+                  "awsId":"TESTAWSID",
+                  "awsKey":"********"
+                }
+              }]
+            },
+            "scanInterval":60000,
+            "paused":true,
+            "sourceType":"Polling",
+            "alive":true
+          }
+        }
+    http_version:
+  recorded_at: Fri, 21 Apr 2017 19:43:35 GMT
+- request:
+    method: delete
+    uri: https://api.us2.sumologic.com/api/v1/collectors/116771369/sources/194207840
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.12.0.1
+      Authorization:
+      - Basic dGVzdHVzZXI6dGVzdHBhc3N3b3Jk
+  response:
+    status:
+      code: 200
+      message:
+    headers:
+      cache-control:
+      - no-cache="set-cookie"
+      date:
+      - Fri, 21 Apr 2017 19:43:35 GMT
+      expires:
+      - Thu, 01-Jan-1970 00:00:00 GMT
+      set-cookie:
+      - JSESSIONID=1fh6hteycsyty1799syvm7zkjh;Path=/api, AWSELB=D9214D6508307E89860421CAE8AF3C4B5AD7978804594DEBB7C85B4009A679B143DDDAE2F7AB83BFCC5D3EB8B0E8B6E26AD9C3474967CB74630341015E23DE549CD285CA32;PATH=/
+      content-length:
+      - '0'
+      connection:
+      - Close
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version:
+  recorded_at: Fri, 21 Apr 2017 19:43:35 GMT
+- request:
+    method: delete
+    uri: https://api.us2.sumologic.com/api/v1/collectors/116771369/sources/194207840
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.12.0.1
+      Authorization:
+      - Basic dGVzdHVzZXI6dGVzdHBhc3N3b3Jk
+  response:
+    status:
+      code: 404
+      message:
+    headers:
+      cache-control:
+      - no-cache="set-cookie"
+      content-type:
+      - application/json; charset=ISO-8859-1
+      date:
+      - Fri, 21 Apr 2017 19:43:35 GMT
+      set-cookie:
+      - AWSELB=D9214D6508307E89860421CAE8AF3C4B5AD7978804594DEBB7C85B4009A679B143DDDAE2F7AD57A987B21640E3D01E6E14B656DB3258B7DFB1DF8F5C9D8B3A10ED9DEE9258;PATH=/
+      content-length:
+      - '143'
+      connection:
+      - Close
+    body:
+      encoding: UTF-8
+      string: |-
+        {
+          "status" : 404,
+          "id" : "VK3HS-LJJMD-DM3D5",
+          "code" : "collectors.source.invalid",
+          "message" : "The specified source ID is invalid."
+        }
+    http_version:
+  recorded_at: Fri, 21 Apr 2017 19:43:36 GMT
+recorded_with: VCR 3.0.3

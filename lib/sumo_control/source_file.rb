@@ -12,7 +12,7 @@ class SumoControl
     def write(source_definition)
       FileUtils.mkdir_p(path.dirname)
 
-      File.open(path, "w+") do |f|
+      File.open(path, 'w+') do |f|
         f.write(source_definition.to_s)
       end
     end

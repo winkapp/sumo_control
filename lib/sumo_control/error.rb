@@ -11,5 +11,9 @@ class SumoControl
     def duplicate?
       code == 'collectors.validation.name.duplicate'
     end
+
+    def invalid?
+      %w(collectors.collector.invalid collectors.source.invalid).include? code
+    end
   end
 end

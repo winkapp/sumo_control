@@ -1,58 +1,43 @@
 require 'json'
 
 class SumoControl
-  class SourceDefinition
+  class CollectorDefinition
     FIELDS = [
       :alive,
-      :auth_method,
-      :automatic_date_parsing,
-      :blacklist,
       :category,
-      :content_type,
+      :collector_type,
+      :collector_version,
+      :cutoff_relative_time,
       :cutoff_timestamp,
-      :default_date_format,
       :description,
-      :encoding,
-      :filters,
-      :force_time_zone,
+      :ephemeral,
       :host_name,
       :id,
-      :key_password,
-      :key_path,
-      :manual_prefix_regexp,
-      :message_per_request,
-      :multiline_processing_enabled,
+      :last_seen_alive,
+      :links,
       :name,
-      :path_expression,
-      :paused,
-      :remote_hosts,
-      :remote_password,
-      :remote_path,
-      :remote_port,
-      :remote_user,
-      :scan_interval,
-      :source_type,
-      :status,
+      :os_arch,
+      :os_name,
+      :os_time,
+      :os_version,
+      :source_sync_mode,
+      :target_cpu,
       :time_zone,
-      :third_party_ref,
-      :url,
-      :use_autoline_matching,
-      :version,
     ]
 
     attr_accessor :version, *FIELDS
 
-    def self.from_payload(source_payload, version = nil)
+    def self.from_payload(collector_payload, version = nil)
       assignment_method = lambda{|key| key.split(/(?=[A-Z])/).map(&:downcase).join('_') + '='}
 
-      source_definition = source_payload.inject(new) do |definition, (key, value)|
+      collector_definition = collector_payload.inject(new) do |definition, (key, value)|
         definition.send(assignment_method[key], value)
         definition
       end
 
-      source_definition.version = version
+      collector_definition.version = version
 
-      source_definition
+      collector_definition
     end
 
     def initialize(attributes = {})
@@ -85,7 +70,8 @@ class SumoControl
           [lower_camelize(field), send(field)]
         end
       ]
-      {source: definition}
+
+      {:collector => definition}
     end
 
   private
