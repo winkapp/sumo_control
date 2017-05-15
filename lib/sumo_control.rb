@@ -73,8 +73,6 @@ class SumoControl
   end
 
   def register_file_source(collector_id, source_definition, source_json_path)
-    # yield source_definition = SourceDefinition.new
-
     updated_source_definition = register_source(collector_id, source_definition)
     store_source(updated_source_definition, source_json_path)
 
