@@ -48,6 +48,14 @@ describe SumoControl, :vcr do
       sumo.delete_collector(name)
     end
 
+    specify 'should find a collector by name' do
+      collector = sumo.find_collector(name)
+      expect(collector.name).to eql(name)
+      expect(collector.category).to eql(category)
+      expect(collector.description).to eql(description)
+      expect(collector.id).to eql(expected_collector_id)
+    end
+
   end
 
   context 'SumoLogic Service New File Source', vcr: {cassette_name: 'new_source'} do
@@ -206,7 +214,7 @@ describe SumoControl::Client, :vcr do
 
     specify 'should list all collectors' do
       collectors = sumoclient.collectors
-      expect(collectors.count).to eql 125
+      expect(collectors.count).to eql(125)
     end
 
     specify 'should get a single collector' do

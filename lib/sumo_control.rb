@@ -72,6 +72,15 @@ class SumoControl
     logger.fatal(error)
   end
 
+  def find_collector(collector_name)
+    collectors = client.collectors.select { |c| c.name == collector_name }
+    if collectors.count == 1
+      collectors.first
+    elsif collectors.count > 1
+      raise "Ambiguous name: #{collector_name} (Multiple collectors found with that name)."
+    end
+  end
+
   def register_file_source(collector_id, source_definition, source_json_path)
     updated_source_definition = register_source(collector_id, source_definition)
     store_source(updated_source_definition, source_json_path)
