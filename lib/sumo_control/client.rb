@@ -178,17 +178,16 @@ class SumoControl
 
     def log_request(url, object = nil, method = 'GET')
       logger.debug("#{method} #{url}")
-      logger.debug("Body: #{JSON.pretty_generate(object.to_h)}") unless object.nil?
+      # logger.debug("Body: #{JSON.pretty_generate(object.to_h)}") unless object.nil?
     end
 
     def log_response(response)
       logger.debug("Response Status: #{response.status}")
-
-      if response.body.strip.empty?
-        logger.debug('No body')
-      else
-        logger.debug("Body: #{response.body}")
-      end
+      # if response.body.strip.empty?
+      #   logger.debug('No body')
+      # else
+      #   logger.debug("Body: #{response.body}")
+      # end
     end
 
     def handle_response(response)
